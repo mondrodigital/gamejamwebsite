@@ -25,7 +25,7 @@ const HostsData: HostCardProps[] = [
     name: "Greg Isenberg",
     role: "Founder & CEO",
     company: "Late Checkout",
-    image: "/src/components/ui/greg.jpg",
+    image: "/images/greg.jpg",
     twitter: "gregisenberg",
     bio: "Community building expert and entrepreneur helping build the internet's most vibrant communities. Advisor to Reddit's largest communities and founder of Late Checkout. Leading the charge in reimagining how online communities are built and scaled."
   }
@@ -36,7 +36,7 @@ const JudgesData: JudgesCardProps[] = [
     name: "Logan Paul",
     role: "Founder & CEO",
     company: "Prime Hydration",
-    image: "/src/components/ui/Logan.jpg",
+    image: "/images/Logan.jpg",
     twitter: "LoganPaul",
     bio: "Serial entrepreneur and digital pioneer with multiple successful ventures in tech and media. Co-founder of Prime Hydration, leading the revolution in sports hydration and building a global brand phenomenon."
   },
@@ -44,7 +44,7 @@ const JudgesData: JudgesCardProps[] = [
     name: "Sara Guo",
     role: "Founder",
     company: "Conviction",
-    image: "/src/components/ui/sarahguo.jpg",
+    image: "/images/sarahguo.jpg",
     twitter: "saranormous",
     bio: "Pioneering investor and founder shaping the future of technology and venture capital. Building Conviction to back the next generation of transformative companies."
   },
@@ -52,7 +52,7 @@ const JudgesData: JudgesCardProps[] = [
     name: "Pieter Levels",
     role: "Founder",
     company: "Nomad List & Remote OK",
-    image: "/src/components/ui/levels.jpg",
+    image: "/images/levels.jpg",
     twitter: "levelsio",
     bio: "Solo founder building profitable startups. Pioneer of the digital nomad movement and creator of Nomad List and Remote OK. Advocate for bootstrapped entrepreneurship and remote work culture."
   },
@@ -60,7 +60,7 @@ const JudgesData: JudgesCardProps[] = [
     name: "Theo",
     role: "Founder",
     company: "Ping.gg",
-    image: "/src/components/ui/theo.jpg",
+    image: "/images/theo.jpg",
     twitter: "theo",
     bio: "Serial entrepreneur and developer advocate. Creator of Ping.gg and influential voice in the developer tooling space, known for innovative approaches to technical content creation."
   },

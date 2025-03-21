@@ -9,47 +9,47 @@ export const allLogos = [
   { 
     name: "Algorand", 
     id: 1, 
-    img: () => <img src="/src/components/ui/algorand_full_logo_white.png" alt="Algorand" className="h-8 w-auto" />
+    img: () => <img src="/images/algorand_full_logo_white.png" alt="Algorand" className="h-8 w-auto" />
   },
   { 
     name: "Cloudflare", 
     id: 2, 
-    img: () => <img src="/src/components/ui/cloudflare.png" alt="Cloudflare" className="h-8 w-auto" />
+    img: () => <img src="/images/cloudflare.png" alt="Cloudflare" className="h-8 w-auto" />
   },
   { 
     name: "Netlify", 
     id: 3, 
-    img: () => <img src="/src/components/ui/logo-netlify-large-monochrome-darkmode.png" alt="Netlify" className="h-8 w-auto" />
+    img: () => <img src="/images/logo-netlify-large-monochrome-darkmode.png" alt="Netlify" className="h-8 w-auto" />
   },
   { 
     name: "Supabase", 
     id: 4, 
-    img: () => <img src="/src/components/ui/supabase_BIG.D-94f7cfaf.png" alt="Supabase" className="h-8 w-auto" />
+    img: () => <img src="/images/supabase_BIG.D-94f7cfaf.png" alt="Supabase" className="h-8 w-auto" />
   },
   { 
     name: "Sentry", 
     id: 5, 
-    img: () => <img src="/src/components/ui/sentry-dark.png" alt="Sentry" className="h-8 w-auto" />
+    img: () => <img src="/images/sentry-dark.png" alt="Sentry" className="h-8 w-auto" />
   },
   { 
     name: "Loops", 
     id: 6, 
-    img: () => <img src="/src/components/ui/loopslogo.png" alt="Loops" className="h-12 w-auto" />
+    img: () => <img src="/images/loopslogo.png" alt="Loops" className="h-12 w-auto" />
   },
   { 
     name: "Hacker House", 
     id: 7, 
-    img: () => <img src="/src/components/ui/hacker.png" alt="Hacker House" className="h-8 w-auto" />
+    img: () => <img src="/images/hacker.png" alt="Hacker House" className="h-8 w-auto" />
   },
   { 
     name: "Exa", 
     id: 8, 
-    img: () => <img src="/src/components/ui/exa.png" alt="Exa" className="h-8 w-auto" />
+    img: () => <img src="/images/exa.png" alt="Exa" className="h-8 w-auto" />
   },
   {
     id: 9,
     name: "Bolt.new",
-    img: () => <img src="/src/components/ui/bolttoo.png" alt="Bolt.new" className="h-8 w-auto" />,
+    img: () => <img src="/images/bolttoo.png" alt="Bolt.new" className="h-8 w-auto" />,
     link: "https://bolt.new"
   }
 ];

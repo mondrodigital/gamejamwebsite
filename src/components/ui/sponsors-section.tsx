@@ -7,55 +7,55 @@ const sponsors = [
     name: "Algorand", 
     description: "Leading blockchain platform powering the future of decentralized applications.",
     link: "https://algorand.com",
-    img: () => <img src="/src/components/ui/algorand_full_logo_white.png" alt="Algorand" className="h-12 w-auto mb-6" />
+    img: () => <img src="/images/algorand_full_logo_white.png" alt="Algorand" className="h-12 w-auto mb-6" />
   },
   { 
     name: "Cloudflare", 
     description: "Making the internet faster, safer, and more reliable for everyone.",
     link: "https://cloudflare.com",
-    img: () => <img src="/src/components/ui/cloudflare.png" alt="Cloudflare" className="h-12 w-auto mb-6" />
+    img: () => <img src="/images/cloudflare.png" alt="Cloudflare" className="h-12 w-auto mb-6" />
   },
   { 
     name: "Netlify", 
     description: "The fastest way to build, deploy, and scale modern web projects.",
     link: "https://netlify.com",
-    img: () => <img src="/src/components/ui/logo-netlify-large-monochrome-darkmode.png" alt="Netlify" className="h-12 w-auto mb-6" />
+    img: () => <img src="/images/logo-netlify-large-monochrome-darkmode.png" alt="Netlify" className="h-12 w-auto mb-6" />
   },
   { 
     name: "Supabase", 
     description: "The open source Firebase alternative for building scalable applications.",
     link: "https://supabase.com",
-    img: () => <img src="/src/components/ui/supabase_BIG.D-94f7cfaf.png" alt="Supabase" className="h-12 w-auto mb-6" />
+    img: () => <img src="/images/supabase_BIG.D-94f7cfaf.png" alt="Supabase" className="h-12 w-auto mb-6" />
   },
   { 
     name: "Sentry", 
     description: "Application monitoring and error tracking that helps you ship with confidence.",
     link: "https://sentry.io",
-    img: () => <img src="/src/components/ui/sentry-dark.png" alt="Sentry" className="h-12 w-auto mb-6" />
+    img: () => <img src="/images/sentry-dark.png" alt="Sentry" className="h-12 w-auto mb-6" />
   },
   { 
     name: "Loops", 
     description: "Building the next generation of AI-powered development tools.",
     link: "https://loops.so",
-    img: () => <img src="/src/components/ui/loopslogo.png" alt="Loops" className="h-16 w-auto mb-6" />
+    img: () => <img src="/images/loopslogo.png" alt="Loops" className="h-16 w-auto mb-6" />
   },
   { 
     name: "Hacker House", 
     description: "The world's premier hacker house network for builders and creators.",
     link: "https://lu.ma/hsrhackerhouse",
-    img: () => <img src="/src/components/ui/hacker.png" alt="Hacker House" className="h-12 w-auto mb-6" />
+    img: () => <img src="/images/hacker.png" alt="Hacker House" className="h-12 w-auto mb-6" />
   },
   { 
     name: "Exa", 
     description: "Pioneering the future of AI-powered search and discovery.",
     link: "https://exa.ai",
-    img: () => <img src="/src/components/ui/exa.png" alt="Exa" className="h-12 w-auto mb-6" />
+    img: () => <img src="/images/exa.png" alt="Exa" className="h-12 w-auto mb-6" />
   },
   {
     name: "Bolt.new",
     description: "Build, deploy, and scale your apps",
     link: "https://bolt.new",
-    img: () => <img src="/src/components/ui/bolttoo.png" alt="Bolt.new" className="h-12 w-auto mb-6" />
+    img: () => <img src="/images/bolttoo.png" alt="Bolt.new" className="h-12 w-auto mb-6" />
   }
 ];
 

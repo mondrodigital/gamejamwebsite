@@ -4,7 +4,7 @@ import { Twitter } from "lucide-react";
 export function GlareCardDemo() {
   const judges = [
     {
-      image: "/src/components/ui/Logan.jpg",
+      image: "/images/Logan.jpg",
       name: "Logan Paul",
       title: "Founder & CEO",
       company: "Prime Hydration",
@@ -12,7 +12,7 @@ export function GlareCardDemo() {
       twitter: "LoganPaul"
     },
     {
-      image: "/src/components/ui/levels.jpg",
+      image: "/images/levels.jpg",
       name: "Pieter Levels",
       title: "Founder",
       company: "Nomad List",
@@ -20,7 +20,7 @@ export function GlareCardDemo() {
       twitter: "levelsio"
     },
     {
-      image: "/src/components/ui/evanyou.jpg",
+      image: "/images/evanyou.jpg",
       name: "Evan You",
       title: "Creator",
       company: "Vue.js",

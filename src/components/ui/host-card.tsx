@@ -9,7 +9,7 @@ export function HostCard() {
           <div className="relative h-full">
             <div className="absolute inset-0 rounded-[24px] overflow-hidden">
               <img
-                src="/src/components/ui/greg.jpg"
+                src="/images/greg.jpg"
                 alt="Greg Isenberg"
                 className="w-full h-full object-cover"
               />
