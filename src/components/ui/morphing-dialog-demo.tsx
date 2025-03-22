@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Twitter } from "lucide-react";
+import { Dialog, DialogContent } from "./dialog";
+import { cn } from "@/lib/utils";
+
+// Import images directly
+import evanyouImg from '/images/evanyou.jpg';
+import kpImg from '/images/KP.jpg';
+import alexalbertImg from '/images/alexalbert.jpg';
+import bentrossellImg from '/images/bentrossell.jpg';
 
 type JudgesCardProps = {
   name: string;
@@ -68,7 +76,7 @@ const JudgesData: JudgesCardProps[] = [
     name: "Evan You",
     role: "Creator",
     company: "Vue.js",
-    image: "/src/components/ui/evanyou.jpg",
+    image: evanyouImg,
     twitter: "youyuxi",
     bio: "Open source innovator and creator of Vue.js, one of the world's most popular JavaScript frameworks. Pioneering the future of web development with cutting-edge tools and frameworks."
   },
@@ -76,7 +84,7 @@ const JudgesData: JudgesCardProps[] = [
     name: "KP",
     role: "Founder",
     company: "Riverside.fm",
-    image: "/src/components/ui/kp.jpg",
+    image: kpImg,
     twitter: "thisiskp_",
     bio: "Tech entrepreneur revolutionizing remote content creation. Founder of Riverside.fm, building the future of professional recording and streaming technology."
   },
@@ -84,7 +92,7 @@ const JudgesData: JudgesCardProps[] = [
     name: "Alex Albert",
     role: "Founder",
     company: "Maybe Finance",
-    image: "/src/components/ui/alexalbert.jpg",
+    image: alexalbertImg,
     twitter: "alexalbert__",
     bio: "Financial technology innovator and entrepreneur. Building Maybe Finance to democratize access to professional-grade financial planning and analysis tools."
   },
@@ -92,7 +100,7 @@ const JudgesData: JudgesCardProps[] = [
     name: "Ben Tossell",
     role: "Founder",
     company: "Makerpad",
-    image: "/src/components/ui/bentrossell.jpg",
+    image: bentrossellImg,
     twitter: "bentossell",
     bio: "No-code pioneer and community builder. Founder of Makerpad, empowering the next generation of makers to build without traditional coding."
   }

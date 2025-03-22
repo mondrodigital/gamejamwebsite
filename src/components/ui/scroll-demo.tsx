@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
+import boltImg from '/images/bolt.png';
 
 export function ScrollDemo() {
   return (
@@ -19,7 +20,7 @@ export function ScrollDemo() {
       >
         <div className="absolute inset-0 flex items-center justify-center">
           <img
-            src="/src/components/ui/bolt.png"
+            src={boltImg}
             alt="Bolt Logo"
             className="w-full h-full object-contain"
             style={{
