@@ -255,10 +255,10 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gradient-animate">
-              How it Started
+              The Origin
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              From a simple tweet to the world's largest hackathon
+              One tweet sparked the world's largest hackathon
             </p>
           </div>
           <div className="flex justify-center">
@@ -349,7 +349,7 @@ function App() {
               Meet the Team
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Meet your host and world-class judges - tech's most influential builders and visionaries who will guide and evaluate your projects
+              Your host and judges—tech's most influential builders who will evaluate your work
             </p>
           </div>
 
@@ -380,7 +380,7 @@ function App() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative bg-[#0A0A0A] overflow-hidden py-12">
+      <section className="relative bg-[#0A0A0A] overflow-hidden py-6">
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto h-[32rem] w-full flex flex-col items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-black/10 backdrop-blur-sm relative">
             {/* Particles Background */}
@@ -407,9 +407,9 @@ function App() {
             {/* Content */}
             <div className="relative z-20 text-center px-4">
               <h1 className="md:text-5xl text-4xl lg:text-6xl font-bold text-center text-white mb-4">
-                Be Part of a World Record
+                Make History
                 <span className="block text-xl md:text-2xl lg:text-3xl mt-4 text-gray-400 font-normal">
-                  Join thousands of developers in making history
+                  Join us. Build. Win $1M+ in prizes.
                 </span>
               </h1>
               <div className="mt-8">
@@ -417,9 +417,9 @@ function App() {
                   href="https://form.typeform.com/to/wf94YwH4?typeform" 
                   variant="blue"
                 >
-                  <span className="flex items-center gap-3 text-xl font-semibold justify-center py-2 px-4 min-w-[320px]">
+                  <span className="flex items-center gap-1.5 text-base font-medium justify-center py-1 px-2 min-w-[180px]">
                     Register Now
-                    <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </span>
                 </HoverButton>
               </div>
@@ -454,20 +454,10 @@ function App() {
                     href="https://twitter.com/gregisenberg" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2"
+                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
                   >
                     <Twitter className="w-4 h-4" />
                     Greg Isenberg
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://latecheckout.substack.com" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#2DD4BF] transition-colors"
-                  >
-                    Late Checkout
                   </a>
                 </li>
               </ul>
@@ -482,7 +472,7 @@ function App() {
                     href="https://twitter.com/LoganPaul" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2"
+                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
                   >
                     <Twitter className="w-4 h-4" />
                     Logan Paul
@@ -493,7 +483,7 @@ function App() {
                     href="https://twitter.com/saranormous" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2"
+                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
                   >
                     <Twitter className="w-4 h-4" />
                     Sara Guo
@@ -504,7 +494,7 @@ function App() {
                     href="https://twitter.com/levelsio" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2"
+                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
                   >
                     <Twitter className="w-4 h-4" />
                     Pieter Levels
@@ -515,7 +505,7 @@ function App() {
                     href="https://twitter.com/theo" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2"
+                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
                   >
                     <Twitter className="w-4 h-4" />
                     Theo
@@ -526,7 +516,7 @@ function App() {
                     href="https://twitter.com/youyuxi" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2"
+                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
                   >
                     <Twitter className="w-4 h-4" />
                     Evan You
@@ -537,7 +527,7 @@ function App() {
                     href="https://twitter.com/thisiskp_" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2"
+                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
                   >
                     <Twitter className="w-4 h-4" />
                     KP
@@ -548,7 +538,7 @@ function App() {
                     href="https://twitter.com/alexalbert__" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2"
+                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
                   >
                     <Twitter className="w-4 h-4" />
                     Alex Albert
@@ -559,7 +549,7 @@ function App() {
                     href="https://twitter.com/bentossell" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2"
+                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
                   >
                     <Twitter className="w-4 h-4" />
                     Ben Tossell
@@ -573,37 +563,37 @@ function App() {
               <h3 className="text-lg font-semibold mb-4">Sponsors</h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="https://algorand.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#2DD4BF] transition-colors">
+                  <a href="https://algorand.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
                     Algorand
                   </a>
                 </li>
                 <li>
-                  <a href="https://bolt.new" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#2DD4BF] transition-colors">
+                  <a href="https://bolt.new" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
                     Bolt.new
                   </a>
                 </li>
                 <li>
-                  <a href="https://cloudflare.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#2DD4BF] transition-colors">
+                  <a href="https://cloudflare.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
                     Cloudflare
                   </a>
                 </li>
                 <li>
-                  <a href="https://netlify.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#2DD4BF] transition-colors">
+                  <a href="https://netlify.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
                     Netlify
                   </a>
                 </li>
                 <li>
-                  <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#2DD4BF] transition-colors">
+                  <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
                     Supabase
                   </a>
                 </li>
                 <li>
-                  <a href="https://lu.ma/hsrhackerhouse" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#2DD4BF] transition-colors">
+                  <a href="https://lu.ma/hsrhackerhouse" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
                     Hacker House
                   </a>
                 </li>
                 <li>
-                  <a href="https://exa.ai" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#2DD4BF] transition-colors">
+                  <a href="https://exa.ai" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
                     Exa
                   </a>
                 </li>
@@ -615,21 +605,23 @@ function App() {
               <h3 className="text-lg font-semibold mb-4">Connect</h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2">
-                    <Discord className="w-4 h-4" />
-                    Join Discord
+                  <a 
+                    href="https://twitter.com/bolt_new" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                  >
+                    <Twitter className="w-4 h-4" />
+                    Follow on Twitter
                   </a>
                 </li>
                 <li>
-                  <a href="mailto:hello@hackathon.com" className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2">
+                  <a 
+                    href="mailto:hello@hackathon.com" 
+                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                  >
                     <Mail className="w-4 h-4" />
-                    Email Us
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2">
-                    <Github className="w-4 h-4" />
-                    GitHub
+                    Contact Us
                   </a>
                 </li>
               </ul>
@@ -638,11 +630,11 @@ function App() {
 
           {/* Bottom Bar */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400 border-t border-white/5 pt-8">
-            <p>© 2025 World's Largest Hackathon. All rights reserved.</p>
+            <p>© 2025 World's Largest Hackathon</p>
             <div className="flex gap-6">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-white transition-colors">Code of Conduct</a>
+              <a href="#" className="hover:text-[#73A7FF] transition-colors">Privacy</a>
+              <a href="#" className="hover:text-[#73A7FF] transition-colors">Terms</a>
+              <a href="#" className="hover:text-[#73A7FF] transition-colors">Code of Conduct</a>
             </div>
           </div>
         </div>

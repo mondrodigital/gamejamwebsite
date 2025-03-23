@@ -8,77 +8,79 @@ import { cn } from "@/lib/utils"
 // Create markers with individual flicker speeds for randomized animation
 const MARKERS = [
   // North America
-  { location: [40.7128, -74.006] as [number, number], size: 0.05, flickerSpeed: 0.3 }, // New York
-  { location: [34.0522, -118.2437] as [number, number], size: 0.05, flickerSpeed: 0.25 }, // Los Angeles
-  { location: [51.2538, -85.3232] as [number, number], size: 0.04, flickerSpeed: 0.35 }, // Ontario
-  { location: [19.4326, -99.1332] as [number, number], size: 0.05, flickerSpeed: 0.4 }, // Mexico City
-  { location: [45.5155, -122.6789] as [number, number], size: 0.04, flickerSpeed: 0.3 }, // Portland
-  { location: [41.8781, -87.6298] as [number, number], size: 0.05, flickerSpeed: 0.35 }, // Chicago
-  { location: [25.7617, -80.1918] as [number, number], size: 0.04, flickerSpeed: 0.4 }, // Miami
-  { location: [49.2827, -123.1207] as [number, number], size: 0.04, flickerSpeed: 0.3 }, // Vancouver
+  { location: [40.7128, -74.006] as [number, number], size: 0.05 }, // New York
+  { location: [34.0522, -118.2437] as [number, number], size: 0.05 }, // Los Angeles
+  { location: [51.2538, -85.3232] as [number, number], size: 0.04 }, // Ontario
+  { location: [19.4326, -99.1332] as [number, number], size: 0.05 }, // Mexico City
+  { location: [45.5155, -122.6789] as [number, number], size: 0.04 }, // Portland
+  { location: [41.8781, -87.6298] as [number, number], size: 0.05 }, // Chicago
+  { location: [25.7617, -80.1918] as [number, number], size: 0.04 }, // Miami
+  { location: [49.2827, -123.1207] as [number, number], size: 0.04 }, // Vancouver
 
   // South America
-  { location: [-23.5505, -46.6333] as [number, number], size: 0.05, flickerSpeed: 0.3 }, // São Paulo
-  { location: [-34.6037, -58.3816] as [number, number], size: 0.04, flickerSpeed: 0.35 }, // Buenos Aires
-  { location: [-4.4419, -59.4478] as [number, number], size: 0.04, flickerSpeed: 0.25 }, // Amazon
-  { location: [-33.4489, -70.6693] as [number, number], size: 0.04, flickerSpeed: 0.3 }, // Santiago
-  { location: [-12.0464, -77.0428] as [number, number], size: 0.04, flickerSpeed: 0.35 }, // Lima
-  { location: [-0.1807, -78.4678] as [number, number], size: 0.04, flickerSpeed: 0.4 }, // Quito
+  { location: [-23.5505, -46.6333] as [number, number], size: 0.05 }, // São Paulo
+  { location: [-34.6037, -58.3816] as [number, number], size: 0.04 }, // Buenos Aires
+  { location: [-4.4419, -59.4478] as [number, number], size: 0.04 }, // Amazon
+  { location: [-33.4489, -70.6693] as [number, number], size: 0.04 }, // Santiago
+  { location: [-12.0464, -77.0428] as [number, number], size: 0.04 }, // Lima
+  { location: [-0.1807, -78.4678] as [number, number], size: 0.04 }, // Quito
 
   // Europe
-  { location: [51.5074, -0.1278] as [number, number], size: 0.05, flickerSpeed: 0.3 }, // London
-  { location: [48.8566, 2.3522] as [number, number], size: 0.05, flickerSpeed: 0.35 }, // Paris
-  { location: [52.5200, 13.4050] as [number, number], size: 0.04, flickerSpeed: 0.4 }, // Berlin
-  { location: [41.9028, 12.4964] as [number, number], size: 0.04, flickerSpeed: 0.3 }, // Rome
-  { location: [59.9139, 10.7522] as [number, number], size: 0.04, flickerSpeed: 0.25 }, // Oslo
-  { location: [40.4168, -3.7038] as [number, number], size: 0.04, flickerSpeed: 0.35 }, // Madrid
-  { location: [55.7558, 37.6173] as [number, number], size: 0.05, flickerSpeed: 0.3 }, // Moscow
-  { location: [45.4642, 9.1900] as [number, number], size: 0.04, flickerSpeed: 0.4 }, // Milan
-  { location: [50.0755, 14.4378] as [number, number], size: 0.04, flickerSpeed: 0.35 }, // Prague
+  { location: [51.5074, -0.1278] as [number, number], size: 0.05 }, // London
+  { location: [48.8566, 2.3522] as [number, number], size: 0.05 }, // Paris
+  { location: [52.5200, 13.4050] as [number, number], size: 0.04 }, // Berlin
+  { location: [41.9028, 12.4964] as [number, number], size: 0.04 }, // Rome
+  { location: [59.9139, 10.7522] as [number, number], size: 0.04 }, // Oslo
+  { location: [40.4168, -3.7038] as [number, number], size: 0.04 }, // Madrid
+  { location: [55.7558, 37.6173] as [number, number], size: 0.05 }, // Moscow
+  { location: [45.4642, 9.1900] as [number, number], size: 0.04 }, // Milan
+  { location: [50.0755, 14.4378] as [number, number], size: 0.04 }, // Prague
 
   // Asia
-  { location: [35.6762, 139.6503] as [number, number], size: 0.05, flickerSpeed: 0.3 }, // Tokyo
-  { location: [31.2304, 121.4737] as [number, number], size: 0.05, flickerSpeed: 0.35 }, // Shanghai
-  { location: [22.3193, 114.1694] as [number, number], size: 0.05, flickerSpeed: 0.4 }, // Hong Kong
-  { location: [1.3521, 103.8198] as [number, number], size: 0.04, flickerSpeed: 0.3 }, // Singapore
-  { location: [28.6139, 77.2090] as [number, number], size: 0.05, flickerSpeed: 0.35 }, // New Delhi
-  { location: [39.9042, 116.4074] as [number, number], size: 0.05, flickerSpeed: 0.3 }, // Beijing
-  { location: [37.5665, 126.9780] as [number, number], size: 0.04, flickerSpeed: 0.25 }, // Seoul
-  { location: [13.7563, 100.5018] as [number, number], size: 0.04, flickerSpeed: 0.4 }, // Bangkok
-  { location: [3.1390, 101.6869] as [number, number], size: 0.04, flickerSpeed: 0.35 }, // Kuala Lumpur
-  { location: [14.5995, 120.9842] as [number, number], size: 0.04, flickerSpeed: 0.3 }, // Manila
+  { location: [35.6762, 139.6503] as [number, number], size: 0.05 }, // Tokyo
+  { location: [31.2304, 121.4737] as [number, number], size: 0.05 }, // Shanghai
+  { location: [22.3193, 114.1694] as [number, number], size: 0.05 }, // Hong Kong
+  { location: [1.3521, 103.8198] as [number, number], size: 0.04 }, // Singapore
+  { location: [28.6139, 77.2090] as [number, number], size: 0.05 }, // New Delhi
+  { location: [39.9042, 116.4074] as [number, number], size: 0.05 }, // Beijing
+  { location: [37.5665, 126.9780] as [number, number], size: 0.04 }, // Seoul
+  { location: [13.7563, 100.5018] as [number, number], size: 0.04 }, // Bangkok
+  { location: [3.1390, 101.6869] as [number, number], size: 0.04 }, // Kuala Lumpur
+  { location: [14.5995, 120.9842] as [number, number], size: 0.04 }, // Manila
 
   // Africa
-  { location: [30.0444, 31.2357] as [number, number], size: 0.05, flickerSpeed: 0.3 }, // Cairo
-  { location: [-33.9249, 18.4241] as [number, number], size: 0.04, flickerSpeed: 0.35 }, // Cape Town
-  { location: [6.5244, 3.3792] as [number, number], size: 0.04, flickerSpeed: 0.4 }, // Lagos
-  { location: [-1.2921, 36.8219] as [number, number], size: 0.04, flickerSpeed: 0.3 }, // Nairobi
-  { location: [14.7167, -17.4677] as [number, number], size: 0.04, flickerSpeed: 0.35 }, // Dakar
-  { location: [0.3476, 32.5825] as [number, number], size: 0.04, flickerSpeed: 0.4 }, // Kampala
-  { location: [9.0579, 7.4951] as [number, number], size: 0.04, flickerSpeed: 0.3 }, // Abuja
+  { location: [30.0444, 31.2357] as [number, number], size: 0.05 }, // Cairo
+  { location: [-33.9249, 18.4241] as [number, number], size: 0.04 }, // Cape Town
+  { location: [6.5244, 3.3792] as [number, number], size: 0.04 }, // Lagos
+  { location: [-1.2921, 36.8219] as [number, number], size: 0.04 }, // Nairobi
+  { location: [14.7167, -17.4677] as [number, number], size: 0.04 }, // Dakar
+  { location: [0.3476, 32.5825] as [number, number], size: 0.04 }, // Kampala
+  { location: [9.0579, 7.4951] as [number, number], size: 0.04 }, // Abuja
 
   // Oceania
-  { location: [-33.8688, 151.2093] as [number, number], size: 0.05, flickerSpeed: 0.3 }, // Sydney
-  { location: [-36.8509, 174.7645] as [number, number], size: 0.04, flickerSpeed: 0.35 }, // Auckland
-  { location: [-12.4634, 130.8456] as [number, number], size: 0.04, flickerSpeed: 0.4 }, // Darwin
-  { location: [-37.8136, 144.9631] as [number, number], size: 0.05, flickerSpeed: 0.3 }, // Melbourne
-  { location: [-31.9505, 115.8605] as [number, number], size: 0.04, flickerSpeed: 0.35 }, // Perth
-  { location: [-27.4698, 153.0251] as [number, number], size: 0.04, flickerSpeed: 0.4 }, // Brisbane
+  { location: [-33.8688, 151.2093] as [number, number], size: 0.05 }, // Sydney
+  { location: [-36.8509, 174.7645] as [number, number], size: 0.04 }, // Auckland
+  { location: [-12.4634, 130.8456] as [number, number], size: 0.04 }, // Darwin
+  { location: [-37.8136, 144.9631] as [number, number], size: 0.05 }, // Melbourne
+  { location: [-31.9505, 115.8605] as [number, number], size: 0.04 }, // Perth
+  { location: [-27.4698, 153.0251] as [number, number], size: 0.04 }, // Brisbane
 
   // Tech Hubs
-  { location: [37.7749, -122.4194] as [number, number], size: 0.06, flickerSpeed: 0.3 }, // San Francisco
-  { location: [47.6062, -122.3321] as [number, number], size: 0.05, flickerSpeed: 0.35 }, // Seattle
-  { location: [12.9716, 77.5946] as [number, number], size: 0.05, flickerSpeed: 0.4 }, // Bangalore
-  { location: [25.2048, 55.2708] as [number, number], size: 0.05, flickerSpeed: 0.3 }, // Dubai
-  { location: [52.3676, 4.9041] as [number, number], size: 0.05, flickerSpeed: 0.35 }, // Amsterdam
-  { location: [48.1351, 11.5820] as [number, number], size: 0.05, flickerSpeed: 0.4 }, // Munich
-  { location: [43.6532, -79.3832] as [number, number], size: 0.05, flickerSpeed: 0.3 }, // Toronto
-  { location: [30.2672, 120.1529] as [number, number], size: 0.05, flickerSpeed: 0.35 }, // Hangzhou
+  { location: [37.7749, -122.4194] as [number, number], size: 0.06 }, // San Francisco
+  { location: [47.6062, -122.3321] as [number, number], size: 0.05 }, // Seattle
+  { location: [12.9716, 77.5946] as [number, number], size: 0.05 }, // Bangalore
+  { location: [25.2048, 55.2708] as [number, number], size: 0.05 }, // Dubai
+  { location: [52.3676, 4.9041] as [number, number], size: 0.05 }, // Amsterdam
+  { location: [48.1351, 11.5820] as [number, number], size: 0.05 }, // Munich
+  { location: [43.6532, -79.3832] as [number, number], size: 0.05 }, // Toronto
+  { location: [30.2672, 120.1529] as [number, number], size: 0.05 }, // Hangzhou
 ].map(marker => ({
   location: marker.location,
   size: marker.size,
-  flickerOffset: Math.random() * Math.PI * 2, // Random starting phase
-  flickerSpeed: marker.flickerSpeed,
+  visible: Math.random() > 0.6, // Only some markers start visible
+  signupTimer: Math.random() * 10, // Random timer for "signup" simulation
+  blinkCounter: 0, // Counter to control blinking behavior
+  blinkPhase: Math.random(), // Random blink phase
 }));
 
 // Much brighter base color for more vivid markers
@@ -97,11 +99,11 @@ export function Globe({
   const [r, setR] = useState(0);
   const [time, setTime] = useState(0);
   
-  // Use animation frame for smoother animation with faster update rate
+  // Use animation frame for smoother animation
   useEffect(() => {
     let frameId: number;
     const updateTime = () => {
-      setTime(prev => prev + 0.03); // Faster time step for more noticeable animation
+      setTime(prev => prev + 0.05);
       frameId = requestAnimationFrame(updateTime);
     };
     frameId = requestAnimationFrame(updateTime);
@@ -130,31 +132,62 @@ export function Globe({
       state.width = width * 2;
       state.height = width * 2;
       
-      // Apply enhanced flickering effect to marker color with more dramatic pulsing
-      const twinkleFactor = 0.5 + 0.5 * Math.sin(time * 5); // More dramatic pulsing
+      // Apply glowing effect to base marker color
       if (state.markerColor) {
-        // Make the base color pulse with a stronger blue shimmer
-        state.markerColor[0] = BASE_MARKER_COLOR[0] * twinkleFactor;
-        state.markerColor[1] = BASE_MARKER_COLOR[1] * twinkleFactor;
-        state.markerColor[2] = BASE_MARKER_COLOR[2] * (0.6 + 0.4 * Math.sin(time * 7));
+        state.markerColor[0] = BASE_MARKER_COLOR[0];
+        state.markerColor[1] = BASE_MARKER_COLOR[1];
+        state.markerColor[2] = BASE_MARKER_COLOR[2];
       }
       
-      // Apply more dramatic individual flickering to each marker
+      // Simulate cities lighting up like signups
       if (state.markers) {
+        // Random chance for a city to "sign up" (turn on)
+        if (Math.random() < 0.05) {
+          const offMarkers = MARKERS.filter(m => !m.visible);
+          if (offMarkers.length > 0) {
+            const randomIndex = Math.floor(Math.random() * offMarkers.length);
+            const markerToActivate = offMarkers[randomIndex];
+            markerToActivate.visible = true;
+            markerToActivate.blinkCounter = 5; // Start blinking animation
+          }
+        }
+        
+        // Update each marker's state
         state.markers.forEach((marker: any, index: number) => {
           if (marker && index < MARKERS.length) {
             const customMarker = MARKERS[index];
-            const flickerValue = Math.sin(time * customMarker.flickerSpeed + customMarker.flickerOffset);
             
-            // Create a more dramatic pulsing effect
-            marker.size = customMarker.size * (0.5 + 0.5 * Math.max(0, flickerValue));
+            // Update signup timer
+            customMarker.signupTimer -= 0.05;
             
-            // When the marker is very small, make it almost disappear completely (dramatic flicker)
-            if (flickerValue < -0.5) {
-              marker.size *= 0.2;
-            } else if (flickerValue > 0.7) {
-              // When the marker is at peak brightness, make it glow bigger
-              marker.size *= 1.5;
+            // Active blinking for new signups
+            if (customMarker.blinkCounter > 0) {
+              // Fast blinking animation for new signups
+              const blinkSpeed = 0.3; // Higher value = faster blinking
+              const blinkState = Math.sin(time * 10 * blinkSpeed + customMarker.blinkPhase * 10) > 0;
+              
+              marker.size = blinkState ? customMarker.size * 1.5 : customMarker.size * 0.5;
+              
+              customMarker.blinkCounter -= 0.05;
+            } 
+            // Normal state after blinking ends
+            else if (customMarker.visible) {
+              marker.size = customMarker.size;
+              
+              // Occasional random "turn off" simulation
+              if (customMarker.signupTimer <= 0) {
+                // Reset timer with random duration
+                customMarker.signupTimer = Math.random() * 20 + 10;
+                
+                // Small chance to turn off (simulate user leaving)
+                if (Math.random() < 0.2) {
+                  customMarker.visible = false;
+                }
+              }
+            } 
+            // Invisible state
+            else {
+              marker.size = 0; // Completely invisible
             }
           }
         });

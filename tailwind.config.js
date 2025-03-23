@@ -41,6 +41,8 @@ export default {
         'fifth': 'fifth 8s infinite',
         'meteor-effect': 'meteor 5s linear infinite',
         "text-shimmer": "text-shimmer 2.5s ease-out infinite alternate",
+        "star-movement-top": "star-movement-top 6s ease infinite",
+        "star-movement-bottom": "star-movement-bottom 6s ease infinite",
       },
       keyframes: {
         'gradient-y': {
