@@ -426,12 +426,7 @@ function App() {
           <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-px w-1/4" />
         </div>
 
-        {/* $1 MILLION Text Background */}
-        <div className="absolute bottom-0 right-0 z-10 pointer-events-none w-full overflow-hidden">
-          <div className="text-[6rem] sm:text-[12rem] md:text-[18rem] font-bold text-white/5 select-none text-right pr-4 overflow-hidden">
-            $1M+
-          </div>
-        </div>
+    
 
         {/* Content */}
         <div className="relative z-20 text-center px-4 sm:px-6 md:px-8 max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[40vh] md:min-h-[50vh]">
