@@ -490,6 +490,17 @@ function App() {
                 </li>
                 <li>
                   <a 
+                    href="https://twitter.com/saranormous" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2"
+                  >
+                    <Twitter className="w-4 h-4" />
+                    Sara Guo
+                  </a>
+                </li>
+                <li>
+                  <a 
                     href="https://twitter.com/levelsio" 
                     target="_blank"
                     rel="noopener noreferrer"
@@ -501,6 +512,17 @@ function App() {
                 </li>
                 <li>
                   <a 
+                    href="https://twitter.com/theo" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2"
+                  >
+                    <Twitter className="w-4 h-4" />
+                    Theo
+                  </a>
+                </li>
+                <li>
+                  <a 
                     href="https://twitter.com/youyuxi" 
                     target="_blank"
                     rel="noopener noreferrer"
@@ -508,6 +530,39 @@ function App() {
                   >
                     <Twitter className="w-4 h-4" />
                     Evan You
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://twitter.com/thisiskp_" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2"
+                  >
+                    <Twitter className="w-4 h-4" />
+                    KP
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://twitter.com/alexalbert__" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2"
+                  >
+                    <Twitter className="w-4 h-4" />
+                    Alex Albert
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="https://twitter.com/bentossell" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-[#2DD4BF] transition-colors flex items-center gap-2"
+                  >
+                    <Twitter className="w-4 h-4" />
+                    Ben Tossell
                   </a>
                 </li>
               </ul>
