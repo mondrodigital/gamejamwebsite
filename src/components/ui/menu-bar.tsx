@@ -8,6 +8,9 @@ interface MenuItem {
   label: string
   href: string
   isExternal?: boolean
+  isTypeform?: boolean
+  formId?: string
+  action?: string
 }
 
 interface MenuBarProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -60,7 +63,10 @@ export const MenuBar = React.forwardRef<HTMLDivElement, MenuBarProps>(
   ({ className, items, activeItem, onItemClick, ...props }, ref) => {
     const handleClick = (item: MenuItem) => {
       onItemClick?.(item.label)
-      if (item.isExternal) {
+      if (item.isTypeform) {
+        // The onItemClick handler will show the typeform
+        return
+      } else if (item.isExternal) {
         window.open(item.href, '_blank')
       } else if (item.href === '#') {
         window.scrollTo({ top: 0, behavior: 'smooth' })

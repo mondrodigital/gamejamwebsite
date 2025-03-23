@@ -53,32 +53,20 @@ function XCard({
             className="block w-full"
         >
             <div
-                className={cn(
-                    "w-full min-w-[400px] md:min-w-[500px] max-w-xl p-1.5 rounded-2xl relative isolate overflow-hidden",
-                    "bg-black/40 dark:bg-black/40",
-                    "bg-gradient-to-br from-black/30 to-black/10 dark:from-white/10 dark:to-white/5",
-                    "backdrop-blur-xl backdrop-saturate-[180%]",
-                    "border border-white/10 dark:border-white/10",
-                    "shadow-[0_8px_16px_rgb(0_0_0_/_0.15)] dark:shadow-[0_8px_16px_rgb(0_0_0_/_0.25)]",
-                    "will-change-transform translate-z-0"
-                )}
+                className="relative bg-black p-6 rounded-xl border border-[#2979FF]/20"
             >
-                <div
-                    className={cn(
-                        "w-full p-5 rounded-xl relative",
-                        "bg-gradient-to-br from-black/20 to-transparent dark:from-white/10 dark:to-transparent",
-                        "backdrop-blur-md backdrop-saturate-150",
-                        "border border-white/10 dark:border-white/10",
-                        "text-white dark:text-white",
-                        "shadow-sm",
-                        "will-change-transform translate-z-0",
-                        "before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/5 before:to-transparent dark:before:from-white/5 dark:before:to-transparent before:opacity-0 before:transition-opacity before:pointer-events-none",
-                        "hover:before:opacity-100"
-                    )}
-                >
+                {/* Blue Light Gradients at Top */}
+                <div className="absolute inset-x-0 top-0 z-0">
+                    <div className="absolute inset-x-4 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-[2px] w-3/4 blur-sm" />
+                    <div className="absolute inset-x-4 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-px w-3/4" />
+                    <div className="absolute inset-x-12 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-[5px] w-1/4 blur-sm" />
+                    <div className="absolute inset-x-12 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-px w-1/4" />
+                </div>
+                
+                <div className="relative z-10">
                     <div className="flex gap-3">
                         <div className="flex-shrink-0">
-                            <div className="h-10 w-10 rounded-full overflow-hidden">
+                            <div className="h-10 w-10 rounded-full overflow-hidden border border-[#2979FF]/30">
                                 <img
                                     src={authorImage}
                                     alt={authorName}
@@ -104,7 +92,7 @@ function XCard({
                                 </div>
                                 <button
                                     type="button"
-                                    className="h-8 w-8 text-white/80 hover:text-white hover:bg-black/5 dark:hover:bg-white/5 rounded-lg p-1 flex items-center justify-center"
+                                    className="h-8 w-8 text-white/80 hover:text-white hover:bg-white/5 rounded-lg p-1 flex items-center justify-center"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -125,25 +113,25 @@ function XCard({
                         </div>
                     </div>
 
-                    <div className="mt-2">
+                    <div className="mt-3">
                         {content.map((item, index) => (
                             <p
                                 key={index}
-                                className="text-white dark:text-white text-base"
+                                className="text-white text-base mb-2"
                             >
                                 {item}
                             </p>
                         ))}
-                        <span className="text-white/70 dark:text-white/70 text-sm mt-2 block">
+                        <span className="text-white/70 text-sm mt-2 block">
                             {timestamp}
                         </span>
                     </div>
 
                     {reply && (
-                        <div className="mt-4 pt-4 border-t border-white/10 dark:border-white/10">
+                        <div className="mt-4 pt-4 border-t border-white/10">
                             <div className="flex gap-3">
                                 <div className="flex-shrink-0">
-                                    <div className="h-10 w-10 rounded-full overflow-hidden">
+                                    <div className="h-10 w-10 rounded-full overflow-hidden border border-[#2979FF]/30">
                                         <img
                                             src={reply.authorImage}
                                             alt={reply.authorName}
@@ -153,23 +141,23 @@ function XCard({
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex items-center gap-1">
-                                        <span className="font-semibold text-white dark:text-white hover:underline cursor-pointer">
+                                        <span className="font-semibold text-white hover:underline cursor-pointer">
                                             {reply.authorName}
                                         </span>
                                         {reply.isVerified && (
                                             <VerifiedIcon className="h-4 w-4 text-blue-400" />
                                         )}
-                                        <span className="text-white/70 dark:text-white/70 text-sm">
+                                        <span className="text-white/70 text-sm">
                                             @{reply.authorHandle}
                                         </span>
-                                        <span className="text-white/70 dark:text-white/70 text-sm">
+                                        <span className="text-white/70 text-sm">
                                             ·
                                         </span>
-                                        <span className="text-white/70 dark:text-white/70 text-sm">
+                                        <span className="text-white/70 text-sm">
                                             {reply.timestamp}
                                         </span>
                                     </div>
-                                    <p className="text-white/90 dark:text-white/90 text-sm mt-1">
+                                    <p className="text-white/90 text-sm mt-1">
                                         {reply.content}
                                     </p>
                                 </div>

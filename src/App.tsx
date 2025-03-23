@@ -25,6 +25,7 @@ import { SponsorsSection } from "@/components/ui/sponsors-section";
 import { Navigation } from "@/components/ui/navigation";
 import { HoverButton } from "@/components/ui/hover-button";
 import { BackgroundBeams } from "@/components/ui/background-beams";
+import { TypeformModal } from "@/components/ui/typeform-modal";
 
 const colors = {
   primary: "#2979FF",
@@ -128,6 +129,7 @@ function App() {
             maxDelay={3000}
             starWidth={3}
             starHeight={1}
+            maxStars={8}
           />
         </div>
 
@@ -136,9 +138,9 @@ function App() {
           <SparklesCore
             id="hero-sparkles"
             background="transparent"
-            minSize={0.2}
-            maxSize={0.8}
-            particleDensity={80}
+            minSize={0.3}
+            maxSize={1.0}
+            particleDensity={100}
             className="w-full h-full"
             particleColor="#2979FF"
             speed={0.5}
@@ -146,25 +148,25 @@ function App() {
         </div>
         
         {/* Main Content Container */}
-        <div className="relative z-20 w-full max-w-[1400px] mx-auto px-4">
+        <div className="relative z-20 w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8">
           {/* Content Layout */}
           <div className="relative min-h-screen flex flex-col">
             {/* Header Content */}
-            <div className="mt-20 text-center space-y-6">
+            <div className="mt-16 sm:mt-20 text-center space-y-6">
               {/* Logo + Presents */}
-              <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
                 <img 
                   src="/images/bolttoo.png" 
                   alt="Bolt Logo" 
-                  className="h-10 md:h-12"
+                  className="h-8 sm:h-10 md:h-12"
                 />
-                <span className="text-xl md:text-2xl italic text-gray-300">presents</span>
+                <span className="text-lg sm:text-xl md:text-2xl italic text-gray-300">presents</span>
               </div>
               
               {/* Title */}
-              <h1 className="text-6xl md:text-7xl font-bold">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold px-2 sm:px-0">
                 <span className="relative">
-                  <span className="absolute -inset-6 blur-2xl bg-black/40 rounded-[30px]"></span>
+                  <span className="absolute -inset-6 blur-2xl bg-black/40 rounded-[30px] hidden sm:block"></span>
                   <span className="relative text-white">
                     The World's{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2979FF] via-[#73A7FF] to-[#2979FF] animate-text-shimmer">
@@ -176,28 +178,26 @@ function App() {
               </h1>
 
               {/* Subtitle */}
-              <p className="text-xl relative max-w-2xl mx-auto">
-                <span className="absolute -inset-4 blur-xl bg-black/30 rounded-full"></span>
+              <p className="text-base sm:text-lg md:text-xl relative max-w-2xl mx-auto px-4 sm:px-0">
+                <span className="absolute -inset-4 blur-xl bg-black/30 rounded-full hidden sm:block"></span>
                 <span className="relative text-white">
                 Join us as we break the world record for the largest hackathon with the biggest prize pool ever of $1M+.
                 </span>
               </p>
 
               {/* Action Buttons */}
-              <div className="flex gap-4 justify-center">
-                <HoverButton 
-                  href="https://form.typeform.com/to/wf94YwH4?typeform-source=t.co"
-                  variant="blue"
-                >
-                  <span className="flex items-center gap-2">
-                    Register Now
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </HoverButton>
+              <div className="flex gap-4 justify-center mt-2 sm:mt-0">
+                <TypeformModal formId="wf94YwH4">
+                  <HoverButton variant="blue">
+                    <span className="flex items-center gap-2">
+                      Register Now
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </HoverButton>
+                </TypeformModal>
               </div>
             </div>
 
-            {/* Remove the registration counter from top */}
             {/* Registration Counter Card moved to Globe section */}
             <SimpleGlobeSection registrationCount={registrationCount} />
           </div>
@@ -205,7 +205,7 @@ function App() {
       </div>
 
       {/* Sponsors Section */}
-      <section className="relative bg-[#0A0A0A] pb-12" style={{ position: 'relative', zIndex: 40, marginTop: '-220px' }}>
+      <section className="relative bg-[#0A0A0A] pb-8 sm:pb-12" style={{ position: 'relative', zIndex: 40, marginTop: '-220px' }}>
         <div className="absolute inset-0 z-0">
           <SparklesCore
             id="sponsors-sparkles"
@@ -218,24 +218,23 @@ function App() {
             speed={0.3}
           />
         </div>
-        <div className="relative z-10">
+        <div className="relative z-10 px-4 sm:px-6 md:px-8">
           <LogoCarouselDemo />
-          <div className="text-center mt-8">
-            <HoverButton 
-              href="https://form.typeform.com/to/wf94YwH4?typeform"
-              variant="default"
-            >
-              <span className="flex items-center gap-2">
-                Become a Sponsor
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </HoverButton>
+          <div className="text-center mt-6 sm:mt-8">
+            <TypeformModal formId="wf94YwH4">
+              <HoverButton variant="default">
+                <span className="flex items-center gap-2">
+                  Become a Sponsor
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </HoverButton>
+            </TypeformModal>
           </div>
         </div>
       </section>
 
       {/* How it Started Section */}
-      <section className="py-32 relative bg-[#0A0A0A] overflow-hidden">
+      <section className="py-16 sm:py-20 md:py-32 relative bg-[#0A0A0A] overflow-hidden">
         <div className="absolute inset-0 z-0">
           <SparklesCore
             id="started-sparkles"
@@ -248,13 +247,13 @@ function App() {
             speed={0.3}
           />
         </div>
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gradient-animate">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+          <div className="text-center mb-12 md:mb-20">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-gradient-animate">
               How it Started
             </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              An idea thrown out on X.
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto px-2 sm:px-0">
+              One tweet. A bold idea: bring 100,000 builders together for the largest hackathon ever.
             </p>
           </div>
           <div className="flex justify-center">
@@ -331,26 +330,26 @@ function App() {
             />
           </motion.div>
         </motion.div>
-        <div className="relative z-20">
+        <div className="relative z-20 px-4 sm:px-6 md:px-8">
           <PrizesSection />
         </div>
       </section>
 
       {/* Combined Host and Judges Section */}
-      <section id="judges" className="py-12 relative bg-[#0A0A0A] overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 relative z-20">
+      <section id="judges" className="py-8 sm:py-12 relative bg-[#0A0A0A] overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-20">
           {/* Main Header */}
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gradient-animate">
+          <div className="text-center mb-12 md:mb-20">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-gradient-animate">
               Meet the Team
             </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto px-2 sm:px-0">
               Your host and judges—tech's most influential builders who will evaluate your work
             </p>
           </div>
 
           {/* Host section */}
-          <div id="host-section" className="mb-20">
+          <div id="host-section" className="mb-12 md:mb-20">
             <HostCardMorphing />
           </div>
           
@@ -361,8 +360,8 @@ function App() {
         </div>
 
         {/* Sponsors Section */}
-        <section id="sponsors" className="relative bg-[#0A0A0A] overflow-hidden pb-12 mt-20">
-          <div className="relative z-10">
+        <section id="sponsors" className="relative bg-[#0A0A0A] overflow-hidden pb-8 sm:pb-12 mt-12 md:mt-20">
+          <div className="relative z-10 px-4 sm:px-6 md:px-8">
             <SponsorsSection />
           </div>
         </section>
@@ -370,7 +369,7 @@ function App() {
 
       {/* Build Something Extraordinary Section */}
       <section id="build-extraordinary-section" className="relative bg-[#0A0A0A] overflow-hidden py-6">
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
           <ScrollDemo />
         </div>
       </section>
@@ -380,8 +379,20 @@ function App() {
         {/* BackgroundBeams as full screen background */}
         <BackgroundBeams className="z-0" />
         
+        {/* Add SparklesCore for shooting stars */}
+        <SparklesCore
+          id="make-history-sparkles"
+          className="absolute inset-0 z-10 opacity-70"
+          background="transparent"
+          minSize={0.4}
+          maxSize={1.5}
+          particleColor="#ffffff"
+          particleDensity={80}
+          speed={0.8}
+        />
+        
         {/* Blue Light Gradients at Top */}
-        <div className="absolute inset-x-0 top-0 z-10">
+        <div className="absolute inset-x-0 top-0 z-10 hidden sm:block">
           <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-[2px] w-3/4 blur-sm" />
           <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-px w-3/4" />
           <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-[5px] w-1/4 blur-sm" />
@@ -390,35 +401,34 @@ function App() {
 
         {/* $1 MILLION Text Background */}
         <div className="absolute bottom-0 right-0 z-10 overflow-hidden pointer-events-none w-full flex justify-end items-end">
-          <div className="text-[12rem] md:text-[18rem] font-bold text-white/5 select-none whitespace-nowrap translate-x-[10%] leading-[0.8]">
+          <div className="text-[6rem] sm:text-[12rem] md:text-[18rem] font-bold text-white/5 select-none whitespace-nowrap translate-x-[10%] leading-[0.8]">
             $1 MILLION
           </div>
         </div>
 
         {/* Content */}
-        <div className="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[50vh]">
+        <div className="relative z-20 text-center px-4 sm:px-6 md:px-8 max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[40vh] md:min-h-[50vh]">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center text-white mb-4">
             Make History
-            <span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl mt-4 text-gray-400 font-normal">
+            <span className="block text-base sm:text-lg md:text-2xl lg:text-3xl mt-3 md:mt-4 text-gray-400 font-normal">
               Join us. Build. Win $1M+ in prizes.
             </span>
           </h1>
           <div className="mt-6 md:mt-8">
-            <HoverButton 
-              href="https://form.typeform.com/to/wf94YwH4?typeform" 
-              variant="blue"
-            >
-              <span className="flex items-center gap-1.5 text-base font-medium justify-center py-1 px-2 min-w-[180px]">
-                Register Now
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </HoverButton>
+            <TypeformModal formId="wf94YwH4">
+              <HoverButton variant="blue">
+                <span className="flex items-center gap-1.5 text-base font-medium justify-center py-1 px-2 min-w-[180px]">
+                  Register Now
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </HoverButton>
+            </TypeformModal>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="relative py-24 border-t border-[#2979FF]/30">
+      <footer className="relative py-16 md:py-24 border-t border-[#2979FF]/30">
         <AnimatedGradientBackground
           gradientColors={[
             "#0A0A0A",
@@ -431,32 +441,32 @@ function App() {
           topOffset={-50}
           animationSpeed={0.008}
         />
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
           {/* Footer Links */}
-          <div className="mb-16">
+          <div className="mb-12 md:mb-16">
             {/* Bolt Logo */}
-            <div className="mb-8">
+            <div className="mb-6 md:mb-8">
               <img 
                 src="/images/bolttoo.png" 
                 alt="Bolt Logo" 
-                className="h-10"
+                className="h-8 md:h-10"
               />
             </div>
             
             {/* Grid container for categories and content */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
               {/* Host Column */}
               <div>
-                <h3 className="text-lg font-semibold mb-4">Host</h3>
-                <ul className="space-y-3">
+                <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4">Host</h3>
+                <ul className="space-y-2 md:space-y-3">
                   <li>
                     <a 
                       href="https://twitter.com/gregisenberg" 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2 text-sm md:text-base"
                     >
-                      <Twitter className="w-4 h-4" />
+                      <Twitter className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       Greg Isenberg
                     </a>
                   </li>
@@ -465,16 +475,16 @@ function App() {
 
               {/* Judges Column */}
               <div>
-                <h3 className="text-lg font-semibold mb-4">Judges</h3>
-                <ul className="space-y-3">
+                <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4">Judges</h3>
+                <ul className="space-y-2 md:space-y-3">
                   <li>
                     <a 
                       href="https://twitter.com/LoganPaul" 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2 text-sm md:text-base"
                     >
-                      <Twitter className="w-4 h-4" />
+                      <Twitter className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       Logan Paul
                     </a>
                   </li>
@@ -483,9 +493,9 @@ function App() {
                       href="https://twitter.com/saranormous" 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2 text-sm md:text-base"
                     >
-                      <Twitter className="w-4 h-4" />
+                      <Twitter className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       Sara Guo
                     </a>
                   </li>
@@ -494,9 +504,9 @@ function App() {
                       href="https://twitter.com/levelsio" 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2 text-sm md:text-base"
                     >
-                      <Twitter className="w-4 h-4" />
+                      <Twitter className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       Pieter Levels
                     </a>
                   </li>
@@ -505,9 +515,9 @@ function App() {
                       href="https://twitter.com/theo" 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2 text-sm md:text-base"
                     >
-                      <Twitter className="w-4 h-4" />
+                      <Twitter className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       Theo
                     </a>
                   </li>
@@ -516,9 +526,9 @@ function App() {
                       href="https://twitter.com/youyuxi" 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2 text-sm md:text-base"
                     >
-                      <Twitter className="w-4 h-4" />
+                      <Twitter className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       Evan You
                     </a>
                   </li>
@@ -527,9 +537,9 @@ function App() {
                       href="https://twitter.com/thisiskp_" 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2 text-sm md:text-base"
                     >
-                      <Twitter className="w-4 h-4" />
+                      <Twitter className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       KP
                     </a>
                   </li>
@@ -538,9 +548,9 @@ function App() {
                       href="https://twitter.com/alexalbert__" 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2 text-sm md:text-base"
                     >
-                      <Twitter className="w-4 h-4" />
+                      <Twitter className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       Alex Albert
                     </a>
                   </li>
@@ -549,9 +559,9 @@ function App() {
                       href="https://twitter.com/bentossell" 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2 text-sm md:text-base"
                     >
-                      <Twitter className="w-4 h-4" />
+                      <Twitter className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       Ben Tossell
                     </a>
                   </li>
@@ -560,40 +570,40 @@ function App() {
 
               {/* Sponsors Column */}
               <div>
-                <h3 className="text-lg font-semibold mb-4">Sponsors</h3>
-                <ul className="space-y-3">
+                <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4">Sponsors</h3>
+                <ul className="space-y-2 md:space-y-3">
                   <li>
-                    <a href="https://algorand.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
+                    <a href="https://algorand.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors text-sm md:text-base">
                       Algorand
                     </a>
                   </li>
                   <li>
-                    <a href="https://bolt.new" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
+                    <a href="https://bolt.new" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors text-sm md:text-base">
                       Bolt.new
                     </a>
                   </li>
                   <li>
-                    <a href="https://cloudflare.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
+                    <a href="https://cloudflare.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors text-sm md:text-base">
                       Cloudflare
                     </a>
                   </li>
                   <li>
-                    <a href="https://netlify.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
+                    <a href="https://netlify.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors text-sm md:text-base">
                       Netlify
                     </a>
                   </li>
                   <li>
-                    <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
+                    <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors text-sm md:text-base">
                       Supabase
                     </a>
                   </li>
                   <li>
-                    <a href="https://lu.ma/hsrhackerhouse" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
+                    <a href="https://lu.ma/hsrhackerhouse" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors text-sm md:text-base">
                       Hacker House
                     </a>
                   </li>
                   <li>
-                    <a href="https://exa.ai" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
+                    <a href="https://exa.ai" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors text-sm md:text-base">
                       Exa
                     </a>
                   </li>
@@ -602,25 +612,25 @@ function App() {
 
               {/* Contact Column */}
               <div>
-                <h3 className="text-lg font-semibold mb-4">Connect</h3>
-                <ul className="space-y-3">
+                <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4">Connect</h3>
+                <ul className="space-y-2 md:space-y-3">
                   <li>
                     <a 
                       href="https://twitter.com/bolt_new" 
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2 text-sm md:text-base"
                     >
-                      <Twitter className="w-4 h-4" />
+                      <Twitter className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       Follow on Twitter
                     </a>
                   </li>
                   <li>
                     <a 
                       href="mailto:hello@hackathon.com" 
-                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2 text-sm md:text-base"
                     >
-                      <Mail className="w-4 h-4" />
+                      <Mail className="w-3.5 h-3.5 md:w-4 md:h-4" />
                       Contact Us
                     </a>
                   </li>
@@ -631,14 +641,14 @@ function App() {
 
           {/* Bottom Bar */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-gray-400 border-t border-white/5 pt-6 md:pt-8">
-            <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
+            <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center text-center md:text-left">
               <p>© 2025 World's Largest Hackathon</p>
               <span className="hidden md:inline">•</span>
               <a 
                 href="https://x.com/HanksSauce" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-1"
+                className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-1 justify-center"
               >
                 <Twitter className="w-3 h-3 flex-shrink-0" />
                 <span>Made by @HanksSauce</span>

@@ -103,49 +103,51 @@ export function TimerDisplay() {
   }, [])
 
   return (
-    <div className="relative bg-black/90 backdrop-blur-md p-4 rounded-xl border border-transparent" 
-         style={{ minWidth: '180px' }}>
-      {/* Progress border around the entire card */}
-      <div 
-        className="absolute inset-0 rounded-xl z-0 overflow-hidden"
-        style={{
-          background: `conic-gradient(#2979FF ${timeLeft.progressPercentage}%, transparent 0%)`,
-          padding: '2px'
-        }}
-      >
-        <div className="w-full h-full bg-black/90 backdrop-blur-md rounded-xl"></div>
+    <div className="relative bg-black backdrop-blur-md p-3 sm:p-4 rounded-xl border border-[#2979FF]/20" 
+         style={{ 
+           minWidth: '140px',
+           width: '100%'
+          }}>
+      {/* Blue Light Gradients at Top */}
+      <div className="absolute inset-x-0 top-0 z-0">
+        <div className="absolute inset-x-4 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-[2px] w-3/4 blur-sm" />
+        <div className="absolute inset-x-4 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-px w-3/4" />
+        <div className="absolute inset-x-12 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-[5px] w-1/4 blur-sm" />
+        <div className="absolute inset-x-12 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-px w-1/4" />
       </div>
+      
+      {/* Remove progress border section */}
       
       {/* Content centered */}
       <div className="relative z-10">
-        <p className="text-xs uppercase tracking-wider text-gray-400 mb-1 text-center">Hackathon Starts In</p>
+        <p className="text-[10px] sm:text-xs uppercase tracking-wider text-gray-400 mb-0.5 sm:mb-1 text-center">Hackathon Starts In</p>
         <div className="flex justify-center items-end">
-          <div className="flex flex-col items-center mx-1">
-            <span className="text-xl font-bold tabular-nums">
+          <div className="flex flex-col items-center mx-0.5 sm:mx-1">
+            <span className="text-lg sm:text-xl font-bold tabular-nums">
               {timeLeft.days.toString().padStart(2, '0')}
             </span>
-            <span className="text-[10px] text-gray-400">days</span>
+            <span className="text-[8px] sm:text-[10px] text-gray-400">days</span>
           </div>
-          <span className="text-lg pb-0.5 px-0.5 text-gray-400">:</span>
-          <div className="flex flex-col items-center mx-1">
-            <span className="text-xl font-bold tabular-nums">
+          <span className="text-base sm:text-lg pb-0.5 px-0.5 text-gray-400">:</span>
+          <div className="flex flex-col items-center mx-0.5 sm:mx-1">
+            <span className="text-lg sm:text-xl font-bold tabular-nums">
               {timeLeft.hours.toString().padStart(2, '0')}
             </span>
-            <span className="text-[10px] text-gray-400">hrs</span>
+            <span className="text-[8px] sm:text-[10px] text-gray-400">hrs</span>
           </div>
-          <span className="text-lg pb-0.5 px-0.5 text-gray-400">:</span>
-          <div className="flex flex-col items-center mx-1">
-            <span className="text-xl font-bold tabular-nums">
+          <span className="text-base sm:text-lg pb-0.5 px-0.5 text-gray-400">:</span>
+          <div className="flex flex-col items-center mx-0.5 sm:mx-1">
+            <span className="text-lg sm:text-xl font-bold tabular-nums">
               {timeLeft.minutes.toString().padStart(2, '0')}
             </span>
-            <span className="text-[10px] text-gray-400">min</span>
+            <span className="text-[8px] sm:text-[10px] text-gray-400">min</span>
           </div>
-          <span className="text-lg pb-0.5 px-0.5 text-gray-400">:</span>
-          <div className="flex flex-col items-center mx-1">
-            <span className="text-xl font-bold tabular-nums">
+          <span className="text-base sm:text-lg pb-0.5 px-0.5 text-gray-400">:</span>
+          <div className="flex flex-col items-center mx-0.5 sm:mx-1">
+            <span className="text-lg sm:text-xl font-bold tabular-nums">
               {timeLeft.seconds.toString().padStart(2, '0')}
             </span>
-            <span className="text-[10px] text-gray-400">sec</span>
+            <span className="text-[8px] sm:text-[10px] text-gray-400">sec</span>
           </div>
         </div>
       </div>

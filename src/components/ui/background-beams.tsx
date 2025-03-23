@@ -109,11 +109,13 @@ export const BackgroundBeams = React.memo(
               strokeOpacity="0.4"
               strokeWidth="0.5"
               initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
+              animate={{ pathLength: [0, 1, 0] }}
               transition={{
-                duration: isMobile ? 8 : (Math.random() * 10 + 10),
+                duration: isMobile ? 15 : (Math.random() * 8 + 15),
                 ease: "easeInOut",
                 repeat: Infinity,
+                repeatDelay: 0,
+                times: [0, 0.5, 1],
                 delay: Math.random() * 5,
               }}
             ></motion.path>
@@ -130,15 +132,16 @@ export const BackgroundBeams = React.memo(
                   y2: "0%",
                 }}
                 animate={{
-                  x1: ["0%", "100%"],
-                  x2: ["0%", "95%"],
-                  y1: ["0%", "100%"],
-                  y2: ["0%", `${93 + Math.random() * 8}%`],
+                  x1: ["0%", "50%", "100%", "50%", "0%"],
+                  x2: ["0%", "50%", "95%", "50%", "0%"],
+                  y1: ["0%", "50%", "100%", "50%", "0%"],
+                  y2: ["0%", "45%", `${93 + Math.random() * 8}%`, "45%", "0%"],
                 }}
                 transition={{
-                  duration: isMobile ? 10 : (Math.random() * 10 + 10),
+                  duration: isMobile ? 20 : (Math.random() * 10 + 20),
                   ease: "easeInOut",
                   repeat: Infinity,
+                  repeatDelay: 0,
                   delay: Math.random() * (isMobile ? 5 : 10),
                 }}
               >

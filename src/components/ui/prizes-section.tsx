@@ -16,19 +16,19 @@ const PrizeCard = ({ title, amount, description, isMain = false }: PrizeCardProp
   
   return (
     <motion.div 
-      className={`relative shadow-xl bg-[#0A0A0A] border border-white/10 px-6 py-8 rounded-2xl overflow-hidden ${isMain ? 'md:scale-110 z-10' : ''}`}
+      className={`relative shadow-xl bg-[#0A0A0A] border border-white/10 px-4 sm:px-6 py-6 sm:py-8 rounded-2xl overflow-hidden ${isMain ? 'z-10' : ''}`}
       whileHover={{ y: -5 }}
       transition={{ duration: 0.2 }}
     >
       <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-[#2979FF] to-[#73A7FF] transform scale-[0.80] rounded-full blur-3xl opacity-20" />
       
       <div className="relative z-10">
-        <h3 className="text-2xl font-bold mb-2">{title}</h3>
-        <div className="text-3xl md:text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#2979FF] via-[#73A7FF] to-[#2979FF] animate-text-shimmer">
+        <h3 className="text-xl sm:text-2xl font-bold mb-1 sm:mb-2">{title}</h3>
+        <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#2979FF] via-[#73A7FF] to-[#2979FF] animate-text-shimmer">
           {amount}
         </div>
         
-        <p className="text-gray-400 text-sm">{description}</p>
+        <p className="text-gray-400 text-xs sm:text-sm">{description}</p>
       </div>
 
       <Meteors 
@@ -41,20 +41,18 @@ const PrizeCard = ({ title, amount, description, isMain = false }: PrizeCardProp
 
 export function PrizesSection() {
   return (
-    <div className="py-24">
+    <div className="py-16 sm:py-20 md:py-24">
       <div className="max-w-7xl mx-auto px-4 relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gradient-animate">
-            Now...
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-gradient-animate">
+            How it's going...
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            What started as a simple tweet has evolved into the world's largest hackathon, 
-            featuring an unprecedented $1,000,000+ prize pool to empower the next generation 
-            of innovators.
+          <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto">
+            It's becoming real. $1M+ in prizes and thousands already registered.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
           <PrizeCard 
             title="Grand Prize" 
             amount="$500,000" 
@@ -75,7 +73,7 @@ export function PrizesSection() {
           />
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           <PrizeCard 
             title="AI Innovation" 
             amount="$50,000" 

@@ -244,13 +244,14 @@ export function SimpleGlobeSection({ registrationCount }: SimpleGlobeSectionProp
     <div 
       ref={containerRef}
       style={{ 
-        position: 'relative',
-        height: '800px',
-        width: '100%',
-        overflow: 'hidden',
-        marginTop: '3rem',
-        marginBottom: '0'
+      position: 'relative',
+      height: '800px',
+      width: '100%',
+      overflow: 'hidden',
+      marginTop: '3rem',
+      marginBottom: '0'
       }}
+      className="px-4 sm:px-6 md:px-8"
     >
       {/* Fixed background gradient */}
       <div style={{
@@ -301,15 +302,17 @@ export function SimpleGlobeSection({ registrationCount }: SimpleGlobeSectionProp
           />
         ))}
       </div>
-
+      
       {/* Globe */}
       <div style={{
         position: 'absolute',
         left: '50%',
         top: '45%',
         transform: 'translate(-50%, -50%)',
-        width: '800px',
-        height: '800px',
+        width: '100%',
+        maxWidth: '800px',
+        height: '100%',
+        maxHeight: '800px',
         zIndex: 3
       }}>
         <Globe />
@@ -317,33 +320,30 @@ export function SimpleGlobeSection({ registrationCount }: SimpleGlobeSectionProp
         {/* Floating Cards overlaying the globe */}
         <div className="absolute inset-0 w-full h-full">
           {/* Timer Display - positioned similar to the top-right card in image */}
-          <div className="absolute top-[15%] right-0 transform rotate-3 z-20" 
+          <div className="absolute top-[10%] sm:top-[20%] right-[5%] sm:right-[10%] transform rotate-6 z-20 w-28 sm:w-auto" 
                style={{ filter: "drop-shadow(0 10px 15px rgba(0,0,0,0.3))" }}>
             <TimerDisplay />
           </div>
           
           {/* Registration progress card - moved to the tech stack position */}
-          <div className="absolute top-[35%] left-[5%] transform -rotate-12 z-20"
+          <div className="absolute top-[25%] left-[10%] transform -rotate-12 z-[50] w-auto"
                style={{ 
                  filter: "drop-shadow(0 10px 15px rgba(0,0,0,0.3))"
                }}>
-            <div className="relative bg-black/90 backdrop-blur-md p-4 rounded-xl w-32 h-32 flex flex-col items-center justify-center">
-              {/* Progress border around the entire card */}
-              <div 
-                className="absolute inset-0 rounded-xl z-0 overflow-hidden"
-                style={{
-                  background: `conic-gradient(#2979FF ${Math.min(100, (registrationCount / 100000) * 100)}%, transparent 0%)`,
-                  padding: '2px'
-                }}
-              >
-                <div className="w-full h-full bg-black/90 backdrop-blur-md rounded-xl"></div>
+            <div className="relative bg-black/90 backdrop-blur-md p-3 sm:p-4 rounded-xl w-28 sm:w-32 h-28 sm:h-32 flex flex-col items-center justify-center border border-[#2979FF]/20">
+              {/* Blue Light Gradients at Top */}
+              <div className="absolute inset-x-0 top-0 z-0">
+                <div className="absolute inset-x-4 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-[2px] w-3/4 blur-sm" />
+                <div className="absolute inset-x-4 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-px w-3/4" />
+                <div className="absolute inset-x-8 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-[5px] w-1/4 blur-sm" />
+                <div className="absolute inset-x-8 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-px w-1/4" />
               </div>
               
               {/* Content centered */}
               <div className="relative z-10 flex flex-col items-center">
-                <p className="text-[10px] uppercase tracking-wider text-gray-400 mb-1">Registered</p>
-                <p className="text-2xl font-bold text-white mt-0.5 mb-0.5">{registrationCount.toLocaleString()}</p>
-                <p className="text-[10px] text-gray-400">of 100,000 goal</p>
+                <p className="text-[8px] sm:text-[10px] uppercase tracking-wider text-gray-400 mb-0.5 sm:mb-1">Registered</p>
+                <p className="text-xl sm:text-2xl font-bold text-white mt-0.5 mb-0.5">{registrationCount.toLocaleString()}</p>
+                <p className="text-[8px] sm:text-[10px] text-gray-400">of 100,000 goal</p>
               </div>
             </div>
           </div>

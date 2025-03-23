@@ -14,6 +14,9 @@ const BoltIcon = () => (
   />
 )
 
+// Typeform URL
+const REGISTER_URL = "https://form.typeform.com/to/wf94YwH4?typeform-source=t.co";
+
 const menuItems = [
   {
     icon: BoltIcon,
@@ -34,19 +37,40 @@ const menuItems = [
   },
   {
     label: "Register",
-    href: "https://form.typeform.com/to/wf94YwH4?typeform-source=t.co",
-    isExternal: true,
+    href: "#",
+    action: "register",
   },
 ]
 
 export function MenuBarDemo() {
   const [activeItem, setActiveItem] = useState<string>("Home")
 
+  const handleItemClick = (label: string) => {
+    setActiveItem(label);
+    
+    if (label === "Register") {
+      // Open Typeform in a modal-like iframe directly
+      const w = window.innerWidth * 0.9;
+      const h = window.innerHeight * 0.85;
+      const left = (window.innerWidth - w) / 2;
+      const top = (window.innerHeight - h) / 2;
+      
+      window.open(
+        REGISTER_URL,
+        "typeform-popup",
+        `width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes,status=no,menubar=no,toolbar=no,titlebar=yes`
+      );
+      return false;
+    }
+    
+    return true;
+  }
+
   return (
     <MenuBar
       items={menuItems}
       activeItem={activeItem}
-      onItemClick={setActiveItem}
+      onItemClick={handleItemClick}
       className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50"
     />
   )
