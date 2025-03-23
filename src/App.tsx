@@ -24,6 +24,7 @@ import { PrizesSection } from "@/components/ui/prizes-section";
 import { SponsorsSection } from "@/components/ui/sponsors-section";
 import { Navigation } from "@/components/ui/navigation";
 import { HoverButton } from "@/components/ui/hover-button";
+import { BackgroundBeams } from "@/components/ui/background-beams";
 
 const colors = {
   primary: "#2979FF",
@@ -380,50 +381,36 @@ function App() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative bg-[#0A0A0A] overflow-hidden py-6">
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <div className="max-w-5xl mx-auto h-[32rem] w-full flex flex-col items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-black/10 backdrop-blur-sm relative">
-            {/* Particles Background */}
-            <div className="absolute inset-0 w-full h-full">
-              <SparklesCore
-                background="transparent"
-                minSize={0.4}
-                maxSize={1.2}
-                particleDensity={1000}
-                className="w-full h-full"
-                particleColor="#2979FF"
-                speed={0.8}
-              />
-            </div>
+      <section className="relative bg-[#0A0A0A] overflow-hidden py-24">
+        {/* BackgroundBeams as full screen background */}
+        <BackgroundBeams className="z-0" />
+        
+        {/* Blue Light Gradients at Top */}
+        <div className="absolute inset-x-0 top-0 z-10">
+          <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-[2px] w-3/4 blur-sm" />
+          <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-px w-3/4" />
+          <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-[5px] w-1/4 blur-sm" />
+          <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-px w-1/4" />
+        </div>
 
-            {/* Blue Light Gradients at Top */}
-            <div className="absolute inset-x-0 top-0">
-              <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-[2px] w-3/4 blur-sm" />
-              <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-px w-3/4" />
-              <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-[5px] w-1/4 blur-sm" />
-              <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-px w-1/4" />
-            </div>
-
-            {/* Content */}
-            <div className="relative z-20 text-center px-4">
-              <h1 className="md:text-5xl text-4xl lg:text-6xl font-bold text-center text-white mb-4">
-                Make History
-                <span className="block text-xl md:text-2xl lg:text-3xl mt-4 text-gray-400 font-normal">
-                  Join us. Build. Win $1M+ in prizes.
-                </span>
-              </h1>
-              <div className="mt-8">
-                <HoverButton 
-                  href="https://form.typeform.com/to/wf94YwH4?typeform" 
-                  variant="blue"
-                >
-                  <span className="flex items-center gap-1.5 text-base font-medium justify-center py-1 px-2 min-w-[180px]">
-                    Register Now
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </HoverButton>
-              </div>
-            </div>
+        {/* Content */}
+        <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
+          <h1 className="md:text-5xl text-4xl lg:text-6xl font-bold text-center text-white mb-4">
+            Make History
+            <span className="block text-xl md:text-2xl lg:text-3xl mt-4 text-gray-400 font-normal">
+              Join us. Build. Win $1M+ in prizes.
+            </span>
+          </h1>
+          <div className="mt-8">
+            <HoverButton 
+              href="https://form.typeform.com/to/wf94YwH4?typeform" 
+              variant="blue"
+            >
+              <span className="flex items-center gap-1.5 text-base font-medium justify-center py-1 px-2 min-w-[180px]">
+                Register Now
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </HoverButton>
           </div>
         </div>
       </section>
