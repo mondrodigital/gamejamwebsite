@@ -147,26 +147,20 @@ function App() {
         
         {/* Main Content Container */}
         <div className="relative z-20 w-full max-w-[1400px] mx-auto px-4">
-          {/* Registration Counter Card */}
-          <div className="absolute top-8 left-1/2 -translate-x-1/2 z-30">
-            <div className="flex items-center gap-2 px-4 py-2 bg-black/20 backdrop-blur-sm rounded-full border border-white/5">
-              <div className="flex items-center gap-2">
-                <div className="relative flex items-center">
-                  <div className="w-2 h-2 rounded-full bg-[#2979FF] animate-pulse" />
-                  <div className="absolute w-2 h-2 rounded-full bg-[#2979FF] animate-ping" />
-                </div>
-                <span className="text-white/90 text-sm font-medium">
-                  <span className="tabular-nums">{registrationCount.toLocaleString()}</span>
-                  <span className="ml-2 text-white/60">vibe coders registered</span>
-                </span>
-              </div>
-            </div>
-          </div>
-
           {/* Content Layout */}
           <div className="relative min-h-screen flex flex-col">
             {/* Header Content */}
-            <div className="mt-32 text-center space-y-6">
+            <div className="mt-20 text-center space-y-6">
+              {/* Logo + Presents */}
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <img 
+                  src="/images/bolttoo.png" 
+                  alt="Bolt Logo" 
+                  className="h-10 md:h-12"
+                />
+                <span className="text-xl md:text-2xl italic text-gray-300">presents</span>
+              </div>
+              
               {/* Title */}
               <h1 className="text-6xl md:text-7xl font-bold">
                 <span className="relative">
@@ -203,8 +197,9 @@ function App() {
               </div>
             </div>
 
-            {/* Globe Container */}
-            <SimpleGlobeSection />
+            {/* Remove the registration counter from top */}
+            {/* Registration Counter Card moved to Globe section */}
+            <SimpleGlobeSection registrationCount={registrationCount} />
           </div>
         </div>
       </div>
@@ -381,7 +376,7 @@ function App() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative bg-[#0A0A0A] overflow-hidden py-24">
+      <section className="relative bg-[#0A0A0A] overflow-hidden py-12 md:py-24">
         {/* BackgroundBeams as full screen background */}
         <BackgroundBeams className="z-0" />
         
@@ -394,14 +389,14 @@ function App() {
         </div>
 
         {/* Content */}
-        <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
-          <h1 className="md:text-5xl text-4xl lg:text-6xl font-bold text-center text-white mb-4">
+        <div className="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[50vh]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center text-white mb-4">
             Make History
-            <span className="block text-xl md:text-2xl lg:text-3xl mt-4 text-gray-400 font-normal">
+            <span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl mt-4 text-gray-400 font-normal">
               Join us. Build. Win $1M+ in prizes.
             </span>
           </h1>
-          <div className="mt-8">
+          <div className="mt-6 md:mt-8">
             <HoverButton 
               href="https://form.typeform.com/to/wf94YwH4?typeform" 
               variant="blue"
@@ -616,9 +611,21 @@ function App() {
           </div>
 
           {/* Bottom Bar */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400 border-t border-white/5 pt-8">
-            <p>© 2025 World's Largest Hackathon</p>
-            <div className="flex gap-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-gray-400 border-t border-white/5 pt-6 md:pt-8">
+            <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
+              <p>© 2025 World's Largest Hackathon</p>
+              <span className="hidden md:inline">•</span>
+              <a 
+                href="https://x.com/HanksSauce" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-1"
+              >
+                <Twitter className="w-3 h-3 flex-shrink-0" />
+                <span>Made by @HanksSauce</span>
+              </a>
+            </div>
+            <div className="flex gap-4 md:gap-6 flex-wrap justify-center">
               <a href="#" className="hover:text-[#73A7FF] transition-colors">Privacy</a>
               <a href="#" className="hover:text-[#73A7FF] transition-colors">Terms</a>
               <a href="#" className="hover:text-[#73A7FF] transition-colors">Code of Conduct</a>

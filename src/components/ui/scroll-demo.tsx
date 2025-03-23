@@ -22,7 +22,7 @@ export function ScrollDemo() {
           <img
             src={boltImg}
             alt="Bolt Logo"
-            className="w-full h-full object-contain"
+            className="w-full h-full object-cover"
             style={{
               filter: "drop-shadow(0 0 20px rgba(41, 121, 255, 0.3))"
             }}

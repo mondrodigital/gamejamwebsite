@@ -49,7 +49,11 @@ const FloatingSymbol: React.FC<FloatingSymbolProps> = ({ id, x, y, value, durati
   );
 };
 
-export function SimpleGlobeSection() {
+interface SimpleGlobeSectionProps {
+  registrationCount: number;
+}
+
+export function SimpleGlobeSection({ registrationCount }: SimpleGlobeSectionProps) {
   const [floatingSymbols, setFloatingSymbols] = useState<FloatingSymbolProps[]>([]);
   const [counter, setCounter] = useState(0);
   const [usedSymbols, setUsedSymbols] = useState<Set<string>>(new Set());
@@ -236,21 +240,6 @@ export function SimpleGlobeSection() {
     return () => clearInterval(cleanup);
   }, [floatingSymbols, counter]);
 
-  // Debug interval to ensure things are working
-  useEffect(() => {
-    const debugInterval = setInterval(() => {
-      if (floatingSymbols.length < 5 && counter > 20) {
-        // If we have very few symbols after a while, reset the counter and symbols
-        console.log("Resetting symbols due to low count", floatingSymbols.length);
-        setFloatingSymbols([]);
-        setUsedSymbols(new Set());
-        setCounter(0);
-      }
-    }, 3000);
-    
-    return () => clearInterval(debugInterval);
-  }, [floatingSymbols.length, counter]);
-
   return (
     <div 
       ref={containerRef}
@@ -312,7 +301,7 @@ export function SimpleGlobeSection() {
           />
         ))}
       </div>
-      
+
       {/* Globe */}
       <div style={{
         position: 'absolute',
@@ -325,8 +314,40 @@ export function SimpleGlobeSection() {
       }}>
         <Globe />
         
-        {/* Timer Display */}
-        <TimerDisplay />
+        {/* Floating Cards overlaying the globe */}
+        <div className="absolute inset-0 w-full h-full">
+          {/* Timer Display - positioned similar to the top-right card in image */}
+          <div className="absolute top-[15%] right-0 transform rotate-3 z-20" 
+               style={{ filter: "drop-shadow(0 10px 15px rgba(0,0,0,0.3))" }}>
+            <TimerDisplay />
+          </div>
+          
+          {/* Registration progress card - moved to the tech stack position */}
+          <div className="absolute top-[35%] left-[5%] transform -rotate-12 z-20"
+               style={{ 
+                 filter: "drop-shadow(0 10px 15px rgba(0,0,0,0.3))"
+               }}>
+            <div className="relative bg-black/90 backdrop-blur-md p-4 rounded-xl w-32 h-32 flex flex-col items-center justify-center">
+              {/* Progress border around the entire card */}
+              <div 
+                className="absolute inset-0 rounded-xl z-0 overflow-hidden"
+                style={{
+                  background: `conic-gradient(#2979FF ${Math.min(100, (registrationCount / 100000) * 100)}%, transparent 0%)`,
+                  padding: '2px'
+                }}
+              >
+                <div className="w-full h-full bg-black/90 backdrop-blur-md rounded-xl"></div>
+              </div>
+              
+              {/* Content centered */}
+              <div className="relative z-10 flex flex-col items-center">
+                <p className="text-[10px] uppercase tracking-wider text-gray-400 mb-1">Registered</p>
+                <p className="text-2xl font-bold text-white mt-0.5 mb-0.5">{registrationCount.toLocaleString()}</p>
+                <p className="text-[10px] text-gray-400">of 100,000 goal</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

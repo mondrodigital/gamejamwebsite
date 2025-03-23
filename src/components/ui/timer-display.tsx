@@ -17,7 +17,8 @@ interface TimeLeft {
   hours: number
   minutes: number
   seconds: number
-  isExpired: boolean
+  totalSeconds: number
+  progressPercentage: number
 }
 
 export function TimerDisplay() {
@@ -26,76 +27,128 @@ export function TimerDisplay() {
     hours: 0,
     minutes: 0,
     seconds: 0,
-    isExpired: false,
+    totalSeconds: 0,
+    progressPercentage: 0
   })
 
   useEffect(() => {
-    const calculateTimeLeft = () => {
-      const now = new Date()
-      const difference = timerEndDate.getTime() - now.getTime()
-
-      if (difference <= 0) {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, isExpired: true })
-        return
+    function getTargetDate() {
+      // Target date: April 11
+      const targetDate = new Date();
+      targetDate.setMonth(3); // April (0-indexed)
+      targetDate.setDate(11);
+      targetDate.setHours(0, 0, 0, 0);
+      
+      // If the date has passed this year, set it to next year
+      if (targetDate < new Date()) {
+        targetDate.setFullYear(targetDate.getFullYear() + 1);
       }
+      
+      return targetDate;
+    }
 
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24))
-      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000)
-
-      setTimeLeft({
+    function getTimeUntil(targetDate: Date) {
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
+      
+      // Initial time difference in seconds - used to calculate progress
+      const initialTotalSeconds = 31 * 24 * 60 * 60; // Roughly one month in seconds
+      
+      const totalSeconds = Math.max(0, Math.floor(difference / 1000));
+      
+      // Calculate how far along we are in the countdown (0 to 100)
+      // Start with initialTotalSeconds = 0% progress 
+      // End with 0 seconds left = 100% progress
+      const progressPercentage = Math.min(100, Math.max(0, 100 - ((totalSeconds / initialTotalSeconds) * 100)));
+      
+      if (difference <= 0) {
+        return {
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+          totalSeconds: 0,
+          progressPercentage: 100
+        };
+      }
+      
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      
+      return {
         days,
         hours,
         minutes,
         seconds,
-        isExpired: false,
-      })
+        totalSeconds,
+        progressPercentage
+      };
     }
 
-    calculateTimeLeft()
-    const timer = setInterval(calculateTimeLeft, 1000)
+    function updateTimer() {
+      const targetDate = getTargetDate();
+      const timeUntilTarget = getTimeUntil(targetDate);
+      setTimeLeft(timeUntilTarget);
+    }
 
-    return () => clearInterval(timer)
+    // Initial call
+    updateTimer();
+    
+    // Update every second
+    const interval = setInterval(updateTimer, 1000);
+    
+    return () => clearInterval(interval);
   }, [])
 
-  if (timeLeft.isExpired) return null
-
   return (
-    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">
-      <StarBorder 
-        as="div" 
-        className="pointer-events-none w-auto"
-        color="#2979FF"
-        speed="8s"
+    <div className="relative bg-black/90 backdrop-blur-md p-4 rounded-xl border border-transparent" 
+         style={{ minWidth: '180px' }}>
+      {/* Progress border around the entire card */}
+      <div 
+        className="absolute inset-0 rounded-xl z-0 overflow-hidden"
+        style={{
+          background: `conic-gradient(#2979FF ${timeLeft.progressPercentage}%, transparent 0%)`,
+          padding: '2px'
+        }}
       >
-        <div className="flex items-center text-sm tabular-nums text-white bg-black/80 rounded-[16px] overflow-hidden">
-          <span className="flex items-center justify-center py-0.5 px-1.5 border-r border-primary-foreground/30">
-            <span className="mx-0.5 flex items-end">
-              {timeLeft.days.toString().padStart(2, "0")}
-              <span className="text-white/60 text-xs mb-0.5 ml-0.5">d</span>
+        <div className="w-full h-full bg-black/90 backdrop-blur-md rounded-xl"></div>
+      </div>
+      
+      {/* Content centered */}
+      <div className="relative z-10">
+        <p className="text-xs uppercase tracking-wider text-gray-400 mb-1 text-center">Hackathon Starts In</p>
+        <div className="flex justify-center items-end">
+          <div className="flex flex-col items-center mx-1">
+            <span className="text-xl font-bold tabular-nums">
+              {timeLeft.days.toString().padStart(2, '0')}
             </span>
-          </span>
-          <span className="flex items-center justify-center py-0.5 px-1.5 border-r border-primary-foreground/30">
-            <span className="mx-0.5 flex items-end">
-              {timeLeft.hours.toString().padStart(2, "0")}
-              <span className="text-white/60 text-xs mb-0.5 ml-0.5">h</span>
+            <span className="text-[10px] text-gray-400">days</span>
+          </div>
+          <span className="text-lg pb-0.5 px-0.5 text-gray-400">:</span>
+          <div className="flex flex-col items-center mx-1">
+            <span className="text-xl font-bold tabular-nums">
+              {timeLeft.hours.toString().padStart(2, '0')}
             </span>
-          </span>
-          <span className="flex items-center justify-center py-0.5 px-1.5 border-r border-primary-foreground/30">
-            <span className="mx-0.5 flex items-end">
-              {timeLeft.minutes.toString().padStart(2, "0")}
-              <span className="text-white/60 text-xs mb-0.5 ml-0.5">m</span>
+            <span className="text-[10px] text-gray-400">hrs</span>
+          </div>
+          <span className="text-lg pb-0.5 px-0.5 text-gray-400">:</span>
+          <div className="flex flex-col items-center mx-1">
+            <span className="text-xl font-bold tabular-nums">
+              {timeLeft.minutes.toString().padStart(2, '0')}
             </span>
-          </span>
-          <span className="flex items-center justify-center py-0.5 px-1.5">
-            <span className="mx-0.5 flex items-end">
-              {timeLeft.seconds.toString().padStart(2, "0")}
-              <span className="text-white/60 text-xs mb-0.5 ml-0.5">s</span>
+            <span className="text-[10px] text-gray-400">min</span>
+          </div>
+          <span className="text-lg pb-0.5 px-0.5 text-gray-400">:</span>
+          <div className="flex flex-col items-center mx-1">
+            <span className="text-xl font-bold tabular-nums">
+              {timeLeft.seconds.toString().padStart(2, '0')}
             </span>
-          </span>
+            <span className="text-[10px] text-gray-400">sec</span>
+          </div>
         </div>
-      </StarBorder>
+      </div>
     </div>
   )
 } 
