@@ -251,10 +251,10 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gradient-animate">
-              The Origin
+              How it Started
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              One tweet sparked the world's largest hackathon
+              An idea thrown out on X.
             </p>
           </div>
           <div className="flex justify-center">
@@ -388,6 +388,13 @@ function App() {
           <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-px w-1/4" />
         </div>
 
+        {/* $1 MILLION Text Background */}
+        <div className="absolute bottom-0 right-0 z-10 overflow-hidden pointer-events-none w-full flex justify-end items-end">
+          <div className="text-[12rem] md:text-[18rem] font-bold text-white/5 select-none whitespace-nowrap translate-x-[10%] leading-[0.8]">
+            $1 MILLION
+          </div>
+        </div>
+
         {/* Content */}
         <div className="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[50vh]">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center text-white mb-4">
@@ -426,187 +433,199 @@ function App() {
         />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           {/* Footer Links */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
-            {/* Host Column */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Host</h3>
-              <ul className="space-y-3">
-                <li>
-                  <a 
-                    href="https://twitter.com/gregisenberg" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
-                  >
-                    <Twitter className="w-4 h-4" />
-                    Greg Isenberg
-                  </a>
-                </li>
-              </ul>
+          <div className="mb-16">
+            {/* Bolt Logo */}
+            <div className="mb-8">
+              <img 
+                src="/images/bolttoo.png" 
+                alt="Bolt Logo" 
+                className="h-10"
+              />
             </div>
+            
+            {/* Grid container for categories and content */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              {/* Host Column */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Host</h3>
+                <ul className="space-y-3">
+                  <li>
+                    <a 
+                      href="https://twitter.com/gregisenberg" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                    >
+                      <Twitter className="w-4 h-4" />
+                      Greg Isenberg
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-            {/* Judges Column */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Judges</h3>
-              <ul className="space-y-3">
-                <li>
-                  <a 
-                    href="https://twitter.com/LoganPaul" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
-                  >
-                    <Twitter className="w-4 h-4" />
-                    Logan Paul
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://twitter.com/saranormous" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
-                  >
-                    <Twitter className="w-4 h-4" />
-                    Sara Guo
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://twitter.com/levelsio" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
-                  >
-                    <Twitter className="w-4 h-4" />
-                    Pieter Levels
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://twitter.com/theo" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
-                  >
-                    <Twitter className="w-4 h-4" />
-                    Theo
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://twitter.com/youyuxi" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
-                  >
-                    <Twitter className="w-4 h-4" />
-                    Evan You
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://twitter.com/thisiskp_" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
-                  >
-                    <Twitter className="w-4 h-4" />
-                    KP
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://twitter.com/alexalbert__" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
-                  >
-                    <Twitter className="w-4 h-4" />
-                    Alex Albert
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="https://twitter.com/bentossell" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
-                  >
-                    <Twitter className="w-4 h-4" />
-                    Ben Tossell
-                  </a>
-                </li>
-              </ul>
-            </div>
+              {/* Judges Column */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Judges</h3>
+                <ul className="space-y-3">
+                  <li>
+                    <a 
+                      href="https://twitter.com/LoganPaul" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                    >
+                      <Twitter className="w-4 h-4" />
+                      Logan Paul
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="https://twitter.com/saranormous" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                    >
+                      <Twitter className="w-4 h-4" />
+                      Sara Guo
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="https://twitter.com/levelsio" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                    >
+                      <Twitter className="w-4 h-4" />
+                      Pieter Levels
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="https://twitter.com/theo" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                    >
+                      <Twitter className="w-4 h-4" />
+                      Theo
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="https://twitter.com/youyuxi" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                    >
+                      <Twitter className="w-4 h-4" />
+                      Evan You
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="https://twitter.com/thisiskp_" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                    >
+                      <Twitter className="w-4 h-4" />
+                      KP
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="https://twitter.com/alexalbert__" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                    >
+                      <Twitter className="w-4 h-4" />
+                      Alex Albert
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="https://twitter.com/bentossell" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                    >
+                      <Twitter className="w-4 h-4" />
+                      Ben Tossell
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-            {/* Sponsors Column */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Sponsors</h3>
-              <ul className="space-y-3">
-                <li>
-                  <a href="https://algorand.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
-                    Algorand
-                  </a>
-                </li>
-                <li>
-                  <a href="https://bolt.new" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
-                    Bolt.new
-                  </a>
-                </li>
-                <li>
-                  <a href="https://cloudflare.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
-                    Cloudflare
-                  </a>
-                </li>
-                <li>
-                  <a href="https://netlify.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
-                    Netlify
-                  </a>
-                </li>
-                <li>
-                  <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
-                    Supabase
-                  </a>
-                </li>
-                <li>
-                  <a href="https://lu.ma/hsrhackerhouse" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
-                    Hacker House
-                  </a>
-                </li>
-                <li>
-                  <a href="https://exa.ai" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
-                    Exa
-                  </a>
-                </li>
-              </ul>
-            </div>
+              {/* Sponsors Column */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Sponsors</h3>
+                <ul className="space-y-3">
+                  <li>
+                    <a href="https://algorand.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
+                      Algorand
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://bolt.new" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
+                      Bolt.new
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://cloudflare.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
+                      Cloudflare
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://netlify.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
+                      Netlify
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
+                      Supabase
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://lu.ma/hsrhackerhouse" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
+                      Hacker House
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://exa.ai" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-[#73A7FF] transition-colors">
+                      Exa
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-            {/* Contact Column */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Connect</h3>
-              <ul className="space-y-3">
-                <li>
-                  <a 
-                    href="https://twitter.com/bolt_new" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
-                  >
-                    <Twitter className="w-4 h-4" />
-                    Follow on Twitter
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="mailto:hello@hackathon.com" 
-                    className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
-                  >
-                    <Mail className="w-4 h-4" />
-                    Contact Us
-                  </a>
-                </li>
-              </ul>
+              {/* Contact Column */}
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Connect</h3>
+                <ul className="space-y-3">
+                  <li>
+                    <a 
+                      href="https://twitter.com/bolt_new" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                    >
+                      <Twitter className="w-4 h-4" />
+                      Follow on Twitter
+                    </a>
+                  </li>
+                  <li>
+                    <a 
+                      href="mailto:hello@hackathon.com" 
+                      className="text-gray-400 hover:text-[#73A7FF] transition-colors flex items-center gap-2"
+                    >
+                      <Mail className="w-4 h-4" />
+                      Contact Us
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 

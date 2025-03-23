@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Twitter } from "lucide-react";
-import { Dialog, DialogContent } from "./dialog";
 import { cn } from "@/lib/utils";
 
 // Import images directly
@@ -112,7 +111,7 @@ export function HostCardMorphing() {
       <h2 className="text-2xl font-bold mb-6 text-center">Hosts</h2>
       <div className="flex justify-center">
         {HostsData.map((host, idx) => (
-          <div className="w-full max-w-[400px]" key={idx}>
+          <div className="w-full max-w-[300px]" key={idx}>
             <HostCard {...host} />
           </div>
         ))}
@@ -127,31 +126,39 @@ function HostCard({ name, role, company, image, twitter, bio }: HostCardProps) {
   return (
     <>
       <div
-        className={`glass-card p-8 rounded-xl flex flex-col items-center text-center cursor-pointer relative overflow-hidden border border-white/10 hover:border-white/20 transition-all ${isOpen ? 'no-hover-transform' : ''} min-h-[420px]`}
+        className={`bg-black p-6 rounded-xl flex flex-col items-center text-center cursor-pointer relative overflow-hidden border border-white/10 hover:border-white/20 transition-all ${isOpen ? 'no-hover-transform' : ''} min-h-[300px]`}
         onClick={() => setIsOpen(true)}
       >
-        <div className="w-40 h-40 rounded-full overflow-hidden mb-6 border-2 border-blue-400/20">
+        {/* Blue Light Gradients at Top */}
+        <div className="absolute inset-x-0 top-0 z-0">
+          <div className="absolute inset-x-4 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-[2px] w-3/4 blur-sm" />
+          <div className="absolute inset-x-4 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-px w-3/4" />
+          <div className="absolute inset-x-12 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-[5px] w-1/4 blur-sm" />
+          <div className="absolute inset-x-12 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-px w-1/4" />
+        </div>
+
+        <div className="w-24 h-24 rounded-full overflow-hidden mb-4 border-2 border-blue-400/20 relative z-10">
           <img
             src={image}
             alt={name}
-            width={160}
-            height={160}
+            width={96}
+            height={96}
             className="object-cover w-full h-full"
           />
         </div>
-        <h3 className="font-bold text-xl mb-2">{name}</h3>
-        <p className="text-[#2979FF] font-medium mb-1">{role}</p>
-        <p className="text-neutral-400 text-sm mb-4">{company}</p>
+        <h3 className="font-bold text-lg mb-1 relative z-10">{name}</h3>
+        <p className="text-[#2979FF] font-medium mb-1 relative z-10 text-sm">{role}</p>
+        <p className="text-neutral-400 text-xs mb-3 relative z-10">{company}</p>
         
         <a
           href={`https://twitter.com/${twitter}`}
           target="_blank"
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
-          className="flex items-center gap-2 text-neutral-400 hover:text-[#2979FF] transition-colors mt-auto"
+          className="flex items-center gap-1 text-neutral-400 hover:text-[#2979FF] transition-colors mt-auto relative z-10"
         >
-          <Twitter className="w-4 h-4" />
-          <span className="text-sm">@{twitter}</span>
+          <Twitter className="w-3 h-3" />
+          <span className="text-xs">@{twitter}</span>
         </a>
         
         <div className="shine-effect"></div>
@@ -160,23 +167,31 @@ function HostCard({ name, role, company, image, twitter, bio }: HostCardProps) {
       <DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
         <DialogPrimitive.Portal>
           <DialogPrimitive.Overlay className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50" />
-          <DialogPrimitive.Content className="glass-card fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] bg-black/40 border border-white/10 backdrop-blur-xl rounded-xl overflow-hidden">
-            <div className="flex flex-col items-center text-center p-8 z-10">
-              <div className="w-40 h-40 rounded-full overflow-hidden mb-6 border-2 border-blue-400/20">
+          <DialogPrimitive.Content className="fixed left-[50%] top-[50%] z-50 w-full max-w-md translate-x-[-50%] translate-y-[-50%] bg-black border border-white/10 backdrop-blur-xl rounded-xl overflow-hidden">
+            {/* Blue Light Gradients at Top */}
+            <div className="absolute inset-x-0 top-0 z-0">
+              <div className="absolute inset-x-8 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-[2px] w-3/4 blur-sm" />
+              <div className="absolute inset-x-8 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-px w-3/4" />
+              <div className="absolute inset-x-24 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-[5px] w-1/4 blur-sm" />
+              <div className="absolute inset-x-24 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-px w-1/4" />
+            </div>
+            
+            <div className="flex flex-col items-center text-center p-8 z-10 relative">
+              <div className="w-32 h-32 rounded-full overflow-hidden mb-6 border-2 border-blue-400/20">
                 <img
                   src={image}
                   alt={name}
-                  width={160}
-                  height={160}
+                  width={128}
+                  height={128}
                   className="object-cover w-full h-full"
                 />
               </div>
               
-              <h2 className="text-white text-3xl font-bold mb-2">{name}</h2>
+              <h2 className="text-white text-2xl font-bold mb-2">{name}</h2>
               <p className="text-[#2979FF] font-medium mb-1">{role}</p>
               <p className="text-neutral-300 mb-6">{company}</p>
               
-              <p className="text-neutral-300 text-base mb-8 max-w-md leading-relaxed">
+              <p className="text-neutral-300 text-sm mb-6 max-w-md leading-relaxed">
                 {bio}
               </p>
               
@@ -208,7 +223,7 @@ export function JudgesCardMorphing() {
   return (
     <div className="w-full px-4 py-8">
       <h2 className="text-2xl font-bold mb-6 text-center">Judges</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1400px] mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-[1400px] mx-auto">
         {JudgesData.map((judge, idx) => (
           <JudgeCard key={idx} {...judge} />
         ))}
@@ -223,31 +238,39 @@ function JudgeCard({ name, role, company, image, twitter, bio }: JudgesCardProps
   return (
     <>
       <div
-        className={`glass-card p-8 rounded-xl flex flex-col items-center text-center cursor-pointer relative overflow-hidden border border-white/10 hover:border-white/20 transition-all ${isOpen ? 'no-hover-transform' : ''} min-h-[420px]`}
+        className={`bg-black p-6 rounded-xl flex flex-col items-center text-center cursor-pointer relative overflow-hidden border border-white/10 hover:border-white/20 transition-all ${isOpen ? 'no-hover-transform' : ''} min-h-[300px]`}
         onClick={() => setIsOpen(true)}
       >
-        <div className="w-40 h-40 rounded-full overflow-hidden mb-6 border-2 border-blue-400/20">
+        {/* Blue Light Gradients at Top */}
+        <div className="absolute inset-x-0 top-0 z-0">
+          <div className="absolute inset-x-4 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-[2px] w-3/4 blur-sm" />
+          <div className="absolute inset-x-4 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-px w-3/4" />
+          <div className="absolute inset-x-12 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-[5px] w-1/4 blur-sm" />
+          <div className="absolute inset-x-12 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-px w-1/4" />
+        </div>
+
+        <div className="w-24 h-24 rounded-full overflow-hidden mb-4 border-2 border-blue-400/20 relative z-10">
           <img
             src={image}
             alt={name}
-            width={160}
-            height={160}
+            width={96}
+            height={96}
             className="object-cover w-full h-full"
           />
         </div>
-        <h3 className="font-bold text-xl mb-2">{name}</h3>
-        <p className="text-[#2979FF] font-medium mb-1">{role}</p>
-        <p className="text-neutral-400 text-sm mb-4">{company}</p>
+        <h3 className="font-bold text-lg mb-1 relative z-10">{name}</h3>
+        <p className="text-[#2979FF] font-medium mb-1 relative z-10 text-sm">{role}</p>
+        <p className="text-neutral-400 text-xs mb-3 relative z-10">{company}</p>
         
         <a
           href={`https://twitter.com/${twitter}`}
           target="_blank"
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
-          className="flex items-center gap-2 text-neutral-400 hover:text-[#2979FF] transition-colors mt-auto"
+          className="flex items-center gap-1 text-neutral-400 hover:text-[#2979FF] transition-colors mt-auto relative z-10"
         >
-          <Twitter className="w-4 h-4" />
-          <span className="text-sm">@{twitter}</span>
+          <Twitter className="w-3 h-3" />
+          <span className="text-xs">@{twitter}</span>
         </a>
         
         <div className="shine-effect"></div>
@@ -256,23 +279,31 @@ function JudgeCard({ name, role, company, image, twitter, bio }: JudgesCardProps
       <DialogPrimitive.Root open={isOpen} onOpenChange={setIsOpen}>
         <DialogPrimitive.Portal>
           <DialogPrimitive.Overlay className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50" />
-          <DialogPrimitive.Content className="glass-card fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] bg-black/40 border border-white/10 backdrop-blur-xl rounded-xl overflow-hidden">
-            <div className="flex flex-col items-center text-center p-8 z-10">
-              <div className="w-40 h-40 rounded-full overflow-hidden mb-6 border-2 border-blue-400/20">
+          <DialogPrimitive.Content className="fixed left-[50%] top-[50%] z-50 w-full max-w-md translate-x-[-50%] translate-y-[-50%] bg-black border border-white/10 backdrop-blur-xl rounded-xl overflow-hidden">
+            {/* Blue Light Gradients at Top */}
+            <div className="absolute inset-x-0 top-0 z-0">
+              <div className="absolute inset-x-8 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-[2px] w-3/4 blur-sm" />
+              <div className="absolute inset-x-8 top-0 bg-gradient-to-r from-transparent via-[#2979FF] to-transparent h-px w-3/4" />
+              <div className="absolute inset-x-24 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-[5px] w-1/4 blur-sm" />
+              <div className="absolute inset-x-24 top-0 bg-gradient-to-r from-transparent via-[#73A7FF] to-transparent h-px w-1/4" />
+            </div>
+            
+            <div className="flex flex-col items-center text-center p-8 z-10 relative">
+              <div className="w-32 h-32 rounded-full overflow-hidden mb-6 border-2 border-blue-400/20">
                 <img
                   src={image}
                   alt={name}
-                  width={160}
-                  height={160}
+                  width={128}
+                  height={128}
                   className="object-cover w-full h-full"
                 />
               </div>
               
-              <h2 className="text-white text-3xl font-bold mb-2">{name}</h2>
+              <h2 className="text-white text-2xl font-bold mb-2">{name}</h2>
               <p className="text-[#2979FF] font-medium mb-1">{role}</p>
               <p className="text-neutral-300 mb-6">{company}</p>
               
-              <p className="text-neutral-300 text-base mb-8 max-w-md leading-relaxed">
+              <p className="text-neutral-300 text-sm mb-6 max-w-md leading-relaxed">
                 {bio}
               </p>
               
