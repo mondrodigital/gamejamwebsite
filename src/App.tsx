@@ -26,6 +26,7 @@ import { Navigation } from "@/components/ui/navigation";
 import { HoverButton } from "@/components/ui/hover-button";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { TypeformModal } from "@/components/ui/typeform-modal";
+import { Particles } from "@/components/ui/particles";
 
 const colors = {
   primary: "#2979FF",
@@ -95,10 +96,10 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white overflow-y-auto">
+    <div className="min-h-screen bg-[#0A0A0A] text-white overflow-x-hidden">
       <Navigation />
       {/* Hero Section */}
-      <div className="relative min-h-screen">
+      <div className="relative min-h-screen overflow-hidden">
         {/* Background Gradient */}
         <AnimatedGradientBackground
           gradientColors={[
@@ -118,8 +119,19 @@ function App() {
           }}
         />
         
+        {/* Particles Background */}
+        <div className="absolute inset-0 z-5 overflow-hidden">
+          <Particles 
+            className="size-full"
+            quantity={150}
+            staticity={30}
+            ease={70}
+            color="#ffffff"
+          />
+        </div>
+        
         {/* Stars Background */}
-        <div className="absolute inset-0 z-10">
+        <div className="absolute inset-0 z-10 overflow-hidden">
           <ShootingStars
             starColor={colors.primary}
             trailColor={colors.primary}
@@ -134,7 +146,7 @@ function App() {
         </div>
 
         {/* Sparkles Effect */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <SparklesCore
             id="hero-sparkles"
             background="transparent"
@@ -205,8 +217,8 @@ function App() {
       </div>
 
       {/* Sponsors Section */}
-      <section className="relative bg-[#0A0A0A] pb-8 sm:pb-12" style={{ position: 'relative', zIndex: 40, marginTop: '-220px' }}>
-        <div className="absolute inset-0 z-0">
+      <section className="relative bg-[#0A0A0A] pb-8 sm:pb-12 overflow-hidden" style={{ position: 'relative', zIndex: 40, marginTop: '-220px' }}>
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <SparklesCore
             id="sponsors-sparkles"
             background="transparent"
@@ -235,7 +247,7 @@ function App() {
 
       {/* How it Started Section */}
       <section className="py-16 sm:py-20 md:py-32 relative bg-[#0A0A0A] overflow-hidden">
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <SparklesCore
             id="started-sparkles"
             background="transparent"
@@ -247,6 +259,19 @@ function App() {
             speed={0.3}
           />
         </div>
+        
+        {/* Particles Background */}
+        <div className="absolute inset-0 z-5 overflow-hidden">
+          <Particles 
+            className="size-full"
+            quantity={120}
+            staticity={40}
+            ease={60}
+            size={0.6}
+            color="#ffffff"
+          />
+        </div>
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
           <div className="text-center mb-12 md:mb-20">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-gradient-animate">
@@ -375,21 +400,23 @@ function App() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative bg-[#0A0A0A] overflow-hidden py-12 md:py-24">
+      <section className="relative bg-[#0A0A0A] py-12 md:py-24 overflow-hidden">
         {/* BackgroundBeams as full screen background */}
         <BackgroundBeams className="z-0" />
         
         {/* Add SparklesCore for shooting stars */}
-        <SparklesCore
-          id="make-history-sparkles"
-          className="absolute inset-0 z-10 opacity-70"
-          background="transparent"
-          minSize={0.4}
-          maxSize={1.5}
-          particleColor="#ffffff"
-          particleDensity={80}
-          speed={0.8}
-        />
+        <div className="absolute inset-0 z-10 overflow-hidden">
+          <SparklesCore
+            id="make-history-sparkles"
+            className="w-full h-full opacity-70"
+            background="transparent"
+            minSize={0.4}
+            maxSize={1.5}
+            particleColor="#ffffff"
+            particleDensity={80}
+            speed={0.8}
+          />
+        </div>
         
         {/* Blue Light Gradients at Top */}
         <div className="absolute inset-x-0 top-0 z-10 hidden sm:block">
@@ -400,9 +427,9 @@ function App() {
         </div>
 
         {/* $1 MILLION Text Background */}
-        <div className="absolute bottom-0 right-0 z-10 overflow-hidden pointer-events-none w-full flex justify-end items-end">
-          <div className="text-[6rem] sm:text-[12rem] md:text-[18rem] font-bold text-white/5 select-none whitespace-nowrap translate-x-[10%] leading-[0.8]">
-            $1 MILLION
+        <div className="absolute bottom-0 right-0 z-10 pointer-events-none w-full overflow-hidden">
+          <div className="text-[6rem] sm:text-[12rem] md:text-[18rem] font-bold text-white/5 select-none text-right pr-4 overflow-hidden">
+            $1M+
           </div>
         </div>
 
@@ -640,7 +667,7 @@ function App() {
           </div>
 
           {/* Bottom Bar */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-gray-400 border-t border-white/5 pt-6 md:pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-gray-400 border-t border-white/5 pt-6 md:pt-8 pb-10">
             <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center text-center md:text-left">
               <p>© 2025 World's Largest Hackathon</p>
               <span className="hidden md:inline">•</span>
