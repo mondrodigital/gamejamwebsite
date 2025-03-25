@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
-import { projects, getProjectUrl, getExpandedProjects } from './project-wheel-data';
+import { projects, getProjectUrl } from './project-wheel-data';
 import { ContentModal } from "./content-modal";
 
 // Define CSS styles as a string
@@ -28,7 +28,8 @@ const wheelStyles = `
   transform-origin: center center;
   position: absolute;
   top: 50%;
-  left: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 0;
   height: 0;
   user-select: none;
@@ -64,7 +65,7 @@ const wheelStyles = `
 .genre-link {
   color: inherit;
   text-decoration: none;
-  padding: 6px 10px;
+  padding: 4px 8px;
   border-radius: 4px;
   display: inline-block;
   transition: all 0.2s ease;
@@ -72,6 +73,14 @@ const wheelStyles = `
   cursor: pointer !important;
   position: relative;
   z-index: 100;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .genre-link {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
 }
 
 .genre-link:hover {
@@ -81,36 +90,13 @@ const wheelStyles = `
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-.trailing-links {
-  display: inline-block;
-}
-
-.trailing-link {
-  color: inherit;
-  text-decoration: none;
-  margin-left: 16px;
-  padding: 5px 8px;
-  border-radius: 4px;
-  display: inline-block;
-  transition: all 0.2s ease;
-  cursor: pointer !important;
-  position: relative;
-  z-index: 100;
-}
-
-.trailing-link:hover {
-  background-color: rgba(0, 0, 0, 0.3);
-  text-decoration: underline;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-}
-
-/* New styles for the permanent clickable links */
+/* Links panel styles */
 .genre-links-container {
-  position: absolute;
-  right: 10%;
-  top: 10%;
-  width: 300px;
-  max-height: 80%;
+  position: fixed;
+  right: 16px;
+  top: 80px;
+  width: min(300px, calc(100% - 32px));
+  max-height: 60vh;
   overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 12px;
@@ -119,36 +105,13 @@ const wheelStyles = `
   display: flex;
   flex-direction: column;
   gap: 8px;
+  backdrop-filter: blur(10px);
 }
 
-.permanent-genre-link {
-  color: white;
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  background-color: rgba(255, 255, 255, 0.1);
-  transition: all 0.2s ease;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-}
-
-.permanent-genre-link:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  transform: translateX(5px);
-}
-
-.permanent-genre-link::before {
-  content: "→";
-  margin-right: 8px;
-  font-weight: bold;
-}
-
-/* Style for the toggle button */
 .toggle-links-button {
-  position: absolute;
-  right: 10%;
-  top: 5%;
+  position: fixed;
+  right: 16px;
+  top: 16px;
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
   border: none;
@@ -160,13 +123,10 @@ const wheelStyles = `
   display: flex;
   align-items: center;
   gap: 6px;
+  backdrop-filter: blur(10px);
 }
 
-.toggle-links-button:hover {
-  background-color: rgba(0, 0, 0, 0.9);
-}
-
-/* Portal animation styles */
+/* Portal styles */
 .portal-overlay {
   position: fixed;
   top: 0;
@@ -181,78 +141,15 @@ const wheelStyles = `
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
-}
-
-.portal-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
+  backdrop-filter: blur(5px);
 }
 
 .portal-container {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: min(300px, 90vw);
+  height: min(300px, 90vw);
   cursor: pointer;
   transition: transform 0.3s ease;
-}
-
-.portal-container:hover {
-  transform: scale(1.05);
-}
-
-.portal {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, 
-    #76ff03 0%, 
-    #64dd17 10%, 
-    #43a047 20%, 
-    #00bcd4 40%,
-    #2196f3 60%, 
-    #9c27b0 80%, 
-    #651fff 100%
-  );
-  box-shadow: 0 0 100px #76ff03, 0 0 50px #43a047, 0 0 25px #2196f3;
-  transform-origin: center;
-  animation: portalSpin 2s linear infinite, portalPulse 3s ease-in-out infinite;
-  z-index: 9001;
-}
-
-.portal::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 80%;
-  height: 80%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: #000;
-  box-shadow: 0 0 20px rgba(0, 255, 0, 0.8) inset;
-  z-index: 9002;
-}
-
-.portal-swirl {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: conic-gradient(
-    transparent 0deg,
-    rgba(0, 255, 0, 0.5) 60deg,
-    transparent 120deg,
-    rgba(0, 255, 0, 0.5) 180deg,
-    transparent 240deg,
-    rgba(0, 255, 0, 0.5) 300deg,
-    transparent 360deg
-  );
-  border-radius: 50%;
-  filter: blur(10px);
-  animation: portalSwirl 4s linear infinite;
-  z-index: 9003;
 }
 
 .portal-text {
@@ -261,74 +158,21 @@ const wheelStyles = `
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  font-size: 24px;
-  font-weight: bold;
   text-align: center;
   z-index: 9004;
-  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
-}
-
-.click-instructions {
-  position: absolute;
-  bottom: -50px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
-  animation: pulseText 1.5s ease-in-out infinite;
-}
-
-@keyframes pulseText {
-  0% { opacity: 0.5; transform: translateX(-50%) scale(0.95); }
-  50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
-  100% { opacity: 0.5; transform: translateX(-50%) scale(0.95); }
-}
-
-@keyframes portalSpin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes portalSwirl {
-  0% { transform: rotate(0deg) scale(0.6); }
-  100% { transform: rotate(-360deg) scale(0.6); }
-}
-
-@keyframes portalPulse {
-  0% { transform: scale(0.9); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(0.9); }
-}
-
-@keyframes portalGrow {
-  0% { transform: scale(0); opacity: 0; }
-  60% { transform: scale(1.2); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.portal-particles {
-  position: absolute;
   width: 100%;
-  height: 100%;
-  z-index: 9000;
+  padding: 0 20px;
 }
 
-.portal-particle {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background-color: #76ff03;
-  border-radius: 50%;
+.portal-text h2 {
+  font-size: clamp(18px, 5vw, 24px);
+  margin-bottom: 8px;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+}
+
+.portal-text p {
+  font-size: clamp(14px, 4vw, 18px);
   opacity: 0.8;
-  animation: particleFloat 2s linear infinite;
-}
-
-@keyframes particleFloat {
-  0% { transform: translateY(0) translateX(0); opacity: 1; }
-  100% { transform: translateY(-200px) translateX(100px); opacity: 0; }
 }
 
 /* Judges panel styles */
@@ -399,22 +243,77 @@ const wheelStyles = `
 
 interface RotatingWheelProps {
   className?: string;
+  onProjectClick?: (project: typeof projects[0]) => void;
 }
 
-export const RotatingWheel: React.FC<RotatingWheelProps> = ({ className }) => {
-  const [isDragging, setIsDragging] = useState(false);
+// Convert to forwardRef to allow parent components to access handleProjectClick
+export const RotatingWheel = React.forwardRef<
+  { handleProjectClick: (project: typeof projects[0]) => void; spinToAngle: (angle: number, duration: number, callback?: () => void) => void },
+  RotatingWheelProps
+>(({ className, onProjectClick }, ref) => {
+  // Create an expanded array of projects by splitting author names into words
+  const expandedProjects = projects.flatMap(project => {
+    // Split author name into words and create a project entry for each word
+    const words = project.author.split(/[\s-]+/);
+    return words.map(word => ({
+      ...project,
+      displayName: word
+    }));
+  });
+
+  // Set minimum number of slots to ensure wheel is well populated
+  const minSlots = 72; // Increased from 36 to create more density
+  
+  // Create repeated array to fill the wheel
+  const repeatedProjects = Array.from({ length: Math.ceil(minSlots / expandedProjects.length) })
+    .flatMap(() => expandedProjects)
+    .slice(0, minSlots)
+    .map((project, index) => ({
+      ...project,
+      displayName: project.displayName + (index >= expandedProjects.length ? ` ${Math.floor(index / expandedProjects.length) + 1}` : '')
+    }));
+  
+  // Use repeatedProjects instead of projects
+  const filteredProjects = repeatedProjects;
+  
+  // State to track rotation angle and dragging
   const [currentAngle, setCurrentAngle] = useState(0);
-  const [selectedProject, setSelectedProject] = useState<string>('');
-  const [showPortal, setShowPortal] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isAutoRotating, setIsAutoRotating] = useState(true);
+  const [spinVelocity, setSpinVelocity] = useState(0);
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
   const [showLinks, setShowLinks] = useState(false);
+  // Track rotation direction for auto-rotation
+  const [rotationDirection, setRotationDirection] = useState<'clockwise' | 'counter-clockwise'>('clockwise');
+  // Track animation delay for resuming auto-rotation
+  const [animationDelay, setAnimationDelay] = useState('0s');
+  // Track animation offset for resuming auto-rotation
+  const [animationOffset, setAnimationOffset] = useState(0);
+  
+  // Refs
   const wheelRef = useRef<HTMLDivElement>(null);
-  const isAutoRotatingRef = useRef(true);
-  const lastMousePosRef = useRef({ x: 0, y: 0, angle: 0 });
-  const momentumRef = useRef<number>(0);
+  const dragStartRef = useRef({ x: 0, y: 0, angle: 0, time: 0 });
+  const dragPrevRef = useRef({ x: 0, y: 0, angle: 0, time: 0 });
+  const spinTimerRef = useRef<number | null>(null);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const manualSpinTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // Add new portal state
+  const [showPortal, setShowPortal] = useState(false);
+  const [portalGenre, setPortalGenre] = useState("");
+  const [particles, setParticles] = useState<Array<{id: number, left: number, top: number, delay: number, size: number, color: string}>>([]);
+  const portalTimeoutRef = useRef<number | null>(null);
 
-  // Get expanded projects for the wheel
-  const wheelProjects = getExpandedProjects();
-
+  // Add manual spinning state
+  const [isManuallySpinning, setIsManuallySpinning] = useState(false);
+  const [manualSpinTarget, setManualSpinTarget] = useState(0);
+  const [manualSpinDuration, setManualSpinDuration] = useState(0);
+  
+  // Add modal state
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalUrl, setModalUrl] = useState("");
+  
   // Calculate center point of wheel
   const getWheelCenter = () => {
     const rect = wheelRef.current?.getBoundingClientRect();
@@ -433,28 +332,36 @@ export const RotatingWheel: React.FC<RotatingWheelProps> = ({ className }) => {
   
   // Handle mouse down
   const handleMouseDown = (e: React.MouseEvent | React.TouchEvent) => {
+    // Skip if clicked on a link
     if ((e.target as HTMLElement).tagName === 'A' || 
         (e.target as HTMLElement).closest('a')) {
-      return;
+      return; // Allow link clicks to pass through
     }
     
     e.preventDefault();
     
-    isAutoRotatingRef.current = false;
-    if (momentumRef.current) {
-      cancelAnimationFrame(momentumRef.current);
-      momentumRef.current = 0;
+    // Stop auto-rotation and any ongoing spin
+    setIsAutoRotating(false);
+    if (spinTimerRef.current) {
+      cancelAnimationFrame(spinTimerRef.current);
+      spinTimerRef.current = null;
     }
     
     setIsDragging(true);
     
+    // Get current position and time
     const point = 'touches' in e 
       ? { x: e.touches[0].clientX, y: e.touches[0].clientY }
       : { x: e.clientX, y: e.clientY };
     
+    const time = Date.now();
     const angle = getAngleFromPoint(point);
-    lastMousePosRef.current = { x: point.x, y: point.y, angle };
     
+    // Store starting values
+    dragStartRef.current = { x: point.x, y: point.y, angle, time };
+    dragPrevRef.current = { x: point.x, y: point.y, angle, time };
+    
+    // Add event listeners
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('touchmove', handleMouseMove, { passive: false });
     document.addEventListener('mouseup', handleMouseUp);
@@ -475,7 +382,7 @@ export const RotatingWheel: React.FC<RotatingWheelProps> = ({ className }) => {
     const angle = getAngleFromPoint(point);
     
     // Calculate angle difference
-    let angleDiff = angle - lastMousePosRef.current.angle;
+    let angleDiff = angle - dragPrevRef.current.angle;
     
     // Handle angle wrap-around
     if (angleDiff > 180) angleDiff -= 360;
@@ -483,6 +390,16 @@ export const RotatingWheel: React.FC<RotatingWheelProps> = ({ className }) => {
     
     // Update rotation
     setCurrentAngle(prev => prev + angleDiff);
+    
+    // Calculate and update velocity
+    const timeDiff = time - dragPrevRef.current.time;
+    if (timeDiff > 0) {
+      const velocity = angleDiff / timeDiff * 20; // Scale for more noticeable effect
+      setSpinVelocity(velocity);
+    }
+    
+    // Store current values for next movement
+    dragPrevRef.current = { x: point.x, y: point.y, angle, time };
   };
   
   // Handle mouse up
@@ -498,17 +415,17 @@ export const RotatingWheel: React.FC<RotatingWheelProps> = ({ className }) => {
     document.removeEventListener('touchend', handleMouseUp);
     
     // Apply momentum spin if velocity is significant
-    if (Math.abs(momentumRef.current) > 0.1) {
+    if (Math.abs(spinVelocity) > 0.1) {
       spinWithMomentum();
     } else {
       // Resume auto rotation if no significant momentum
-      setTimeout(() => isAutoRotatingRef.current = true, 500);
+      setTimeout(() => setIsAutoRotating(true), 500);
     }
   };
   
   // Apply spin with momentum
   const spinWithMomentum = () => {
-    let velocity = momentumRef.current;
+    let velocity = spinVelocity;
     
     const spin = () => {
       // Apply friction - slow down gradually
@@ -519,155 +436,482 @@ export const RotatingWheel: React.FC<RotatingWheelProps> = ({ className }) => {
       
       // Stop when velocity becomes very small
       if (Math.abs(velocity) < 0.1) {
-        momentumRef.current = 0;
-        setTimeout(() => isAutoRotatingRef.current = true, 500);
+        setSpinVelocity(0);
+        setTimeout(() => setIsAutoRotating(true), 500);
         return;
       }
       
       // Continue spinning
-      momentumRef.current = requestAnimationFrame(spin);
+      spinTimerRef.current = requestAnimationFrame(spin);
     };
     
-    momentumRef.current = requestAnimationFrame(spin);
+    spinTimerRef.current = requestAnimationFrame(spin);
   };
   
   // Handle wheel scroll to control wheel direction
   const handleWheel = (e: React.WheelEvent) => {
     e.preventDefault();
     
-    isAutoRotatingRef.current = false;
+    // Stop auto-rotation when scrolling
+    setIsAutoRotating(false);
     
+    // Calculate scroll velocity and adjust wheel position
     const scrollAmount = e.deltaY * 0.05;
     setCurrentAngle(prev => prev + scrollAmount);
     
-    if (momentumRef.current) {
-      cancelAnimationFrame(momentumRef.current);
-      momentumRef.current = 0;
+    // Reset any existing timeout
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
     }
     
-    setTimeout(() => {
-      isAutoRotatingRef.current = true;
+    // Resume auto rotation after a delay
+    if (spinTimerRef.current) {
+      cancelAnimationFrame(spinTimerRef.current);
+      spinTimerRef.current = null;
+    }
+    
+    // Set timeout to resume auto-rotation
+    scrollTimeoutRef.current = setTimeout(() => {
+      setIsAutoRotating(true);
+      scrollTimeoutRef.current = null;
     }, 1000);
   };
   
   // Handle project link click with portal animation
-  const handleGenreClick = (projectName: string) => {
-    setSelectedProject(projectName);
-    setShowPortal(true);
+  const handleProjectClick = (project: typeof projects[0]) => {
+    // Find the original project by author
+    const originalProject = projects.find(p => p.author === project.author);
+    if (originalProject) {
+      setSelectedProject(originalProject);
+      setPortalGenre(originalProject.author);
+      setShowPortal(true);
+      
+      // Generate particles for portal effect
+      const newParticles = Array.from({ length: 15 }, (_, i) => ({
+        id: Date.now() + i,
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        delay: Math.random() * 2,
+        size: Math.random() * 6 + 4,
+        color: ['#76ff03', '#64dd17', '#43a047', '#00bcd4', '#2196f3'][Math.floor(Math.random() * 5)]
+      }));
+      setParticles(newParticles);
+    }
   };
   
   // Handle portal click to show modal or redirect
   const handlePortalClick = () => {
-    const url = getProjectUrl(selectedProject);
-    if (url && url !== '#') {
-      window.open(url, '_blank');
+    if (selectedProject) {
+      // Get the URL for the project
+      const projectUrl = getProjectUrl(selectedProject);
+      
+      // Only proceed if we have a valid URL
+      if (projectUrl) {
+        // Open the URL in a new tab
+        window.open(projectUrl, '_blank', 'noopener,noreferrer');
+      }
     }
+    // Close the portal after opening the URL
     setShowPortal(false);
-    setSelectedProject('');
+    setSelectedProject(null);
   };
   
+  // Toggle the links panel
+  const toggleLinks = () => {
+    setShowLinks(prev => !prev);
+  };
+  
+  // Expose methods via ref
+  React.useImperativeHandle(ref, () => ({
+    handleProjectClick,
+    spinToAngle
+  }));
+
+  // Clean up any timers on unmount
+  useEffect(() => {
+    return () => {
+      if (spinTimerRef.current) {
+        cancelAnimationFrame(spinTimerRef.current);
+      }
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      if (manualSpinTimeoutRef.current) {
+        clearTimeout(manualSpinTimeoutRef.current);
+      }
+      if (portalTimeoutRef.current !== null) {
+        window.clearTimeout(portalTimeoutRef.current);
+      }
+    };
+  }, []);
+
   // Helper function to get auto-rotation styles
   const getAutoRotateStyles = () => {
-    if (momentumRef.current) {
+    if (isManuallySpinning) {
       return {};
     }
     
     return {
       transition: 'transform 0.5s ease',
       transform: `rotate(${currentAngle}deg)`,
-      animation: isAutoRotatingRef.current ? `rotateWheel 120s linear infinite ${-currentAngle}deg` : 'none',
-      animationPlayState: isAutoRotatingRef.current ? 'running' : 'paused'
+      animation: isAutoRotating ? `rotateWheel 120s linear infinite ${-currentAngle}deg` : 'none',
+      animationPlayState: isAutoRotating ? 'running' : 'paused'
     };
+  };
+  
+  // Add method to manually spin the wheel to a specific angle
+  const spinToAngle = (targetAngle: number, duration: number = 3000, callback?: () => void) => {
+    // Stop auto-rotation and any ongoing spin
+    setIsAutoRotating(false);
+    setIsManuallySpinning(true);
+    
+    if (spinTimerRef.current) {
+      cancelAnimationFrame(spinTimerRef.current);
+      spinTimerRef.current = null;
+    }
+    
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = null;
+    }
+    
+    if (manualSpinTimeoutRef.current) {
+      clearTimeout(manualSpinTimeoutRef.current);
+      manualSpinTimeoutRef.current = null;
+    }
+    
+    // Get the current rotation angle of the wheel
+    const currentRotation = currentAngle;
+    
+    // Calculate the normalized target angle to find the selected project
+    const normalizedTargetAngle = targetAngle % 360;
+    const itemCount = filteredProjects.length;
+    const anglePerItem = 360 / itemCount;
+    const selectedIndex = Math.round(normalizedTargetAngle / anglePerItem) % itemCount;
+    const selectedProject = filteredProjects[selectedIndex];
+    
+    // Set the selected project
+    setSelectedProject(selectedProject);
+    
+    // Apply spinning animation directly to the wheel element
+    if (wheelRef.current) {
+      // First reset any existing transition to ensure clean start
+      wheelRef.current.style.transition = 'none';
+      wheelRef.current.style.transform = `rotate(${currentRotation}deg)`;
+      
+      // Force reflow to ensure the reset takes effect
+      void wheelRef.current.offsetWidth;
+      
+      // Add transition with an easing function that spins fast then slows down
+      // This creates a more noticeable spinning effect
+      wheelRef.current.style.transition = `transform ${duration/1000}s cubic-bezier(0.1, 0.7, 0.3, 1)`;
+      wheelRef.current.style.transform = `rotate(${targetAngle}deg)`;
+      
+      // Make all items fade slightly during spin
+      const genreItems = document.querySelectorAll('.genre-item');
+      genreItems.forEach(item => {
+        (item as HTMLElement).style.transition = 'all 0.3s ease';
+        (item as HTMLElement).style.opacity = '0.6';
+      });
+      
+      // Calculate timing for the slowdown effect - at 60% of the duration
+      setTimeout(() => {
+        // Start highlighting the approaching selected project
+        if (genreItems[selectedIndex]) {
+          const selectedItem = genreItems[selectedIndex] as HTMLElement;
+          selectedItem.style.textShadow = '0 0 20px currentColor, 0 0 10px white';
+          selectedItem.style.opacity = '1';
+          selectedItem.style.fontWeight = 'bold';
+          selectedItem.style.scale = '1.3';
+          
+          const link = selectedItem.querySelector('.genre-link') as HTMLElement;
+          if (link) {
+            link.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+            link.style.boxShadow = '0 0 15px currentColor';
+          }
+        }
+      }, duration * 0.6);
+      
+      // Add a "click" effect when the wheel stops
+      setTimeout(() => {
+        if (genreItems[selectedIndex]) {
+          const selectedItem = genreItems[selectedIndex] as HTMLElement;
+          selectedItem.style.scale = '1.5';
+          
+          // Create a brief flash effect
+          setTimeout(() => {
+            selectedItem.style.scale = '1.3';
+          }, 150);
+        }
+      }, duration - 100);
+      
+      // After animation completes
+      manualSpinTimeoutRef.current = setTimeout(() => {
+        // Set the current angle to the target
+        setCurrentAngle(targetAngle);
+        
+        // Keep the selected project highlighted briefly before resetting
+        setTimeout(() => {
+          // Reset all project items to normal state
+          const genreItems = document.querySelectorAll('.genre-item');
+          genreItems.forEach(item => {
+            (item as HTMLElement).style.textShadow = '';
+            (item as HTMLElement).style.scale = '';
+            (item as HTMLElement).style.fontWeight = '';
+            (item as HTMLElement).style.opacity = '';
+            
+            const link = (item as HTMLElement).querySelector('.genre-link') as HTMLElement;
+            if (link) {
+              link.style.backgroundColor = '';
+              link.style.boxShadow = '';
+            }
+          });
+          
+          if (wheelRef.current) {
+            wheelRef.current.style.transition = '';
+            wheelRef.current.style.transform = '';
+          }
+          
+          // Save the final position for the auto-rotation to continue from
+          setAnimationOffset(targetAngle % 360);
+          setAnimationDelay('0s');
+          setIsManuallySpinning(false);
+          setIsAutoRotating(true);
+          
+          // Execute the callback if provided
+          if (callback) callback();
+        }, 500);
+      }, duration);
+    }
   };
   
   return (
     <>
-      <div 
-        ref={wheelRef}
-        className={`genre-wheel ${isDragging ? 'dragging' : ''} ${
-          isAutoRotatingRef.current && !isDragging ? 'auto-rotating' : ''
-        } ${className || ''}`}
-        style={getAutoRotateStyles()}
-        onMouseDown={handleMouseDown}
-        onTouchStart={handleMouseDown}
-        onWheel={handleWheel}
-      >
-        <style>{wheelStyles}</style>
-        
-        {wheelProjects.map((project, index) => {
-          const angle = (360 / wheelProjects.length) * index;
-          const color = generateGenreColor(index);
-          const opacity = Math.max(0.4, 1 - Math.abs(((currentAngle % 360) - angle) / 180));
+      <div className="relative w-full min-h-screen overflow-hidden bg-black">
+        <div
+          ref={wheelRef}
+          className={`genre-wheel ${isDragging ? 'dragging' : ''} ${
+            isAutoRotating ? 'auto-rotating' : ''
+          } ${className || ''}`}
+          style={getAutoRotateStyles()}
+          onMouseDown={handleMouseDown}
+          onTouchStart={handleMouseDown}
+          onWheel={handleWheel}
+        >
+          <style>{wheelStyles}</style>
+          
+          {/* Add Judges Panel */}
+          <div className="judges-panel">
+            <div className="judges-title">Judges</div>
+            <div className="judges-grid">
+              {projects.filter(p => p.isJudge).map((judge, index) => (
+                <div 
+                  key={judge.handle} 
+                  className="judge-item"
+                  onClick={() => window.open(judge.tweetUrl, '_blank', 'noopener,noreferrer')}
+                >
+                  <img 
+                    src={`/images/${judge.imageUrl}`} 
+                    alt={judge.author}
+                    className="judge-image"
+                    loading="eager"
+                  />
+                  <div className="judge-name">@{judge.handle}</div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-          return (
-            <div
-              key={`${project.name}-${index}`}
-              className="genre-item"
-              style={{
-                transform: `rotate(${angle}deg) translateX(300px) rotate(-${angle}deg)`,
-                color,
-                opacity,
-              }}
+          {/* Add mask gradient container */}
+          <div className="absolute inset-0 pointer-events-none" style={{
+            background: 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 75%, rgba(0,0,0,1) 95%)',
+            maskImage: 'linear-gradient(to right, black 0%, black 75%, transparent 95%)',
+            WebkitMaskImage: 'linear-gradient(to right, black 0%, black 75%, transparent 95%)',
+            zIndex: 20,
+            width: '150%'  // Extend the mask beyond the container
+          }} />
+          <div className="absolute w-full h-full">
+            <div 
+              ref={wheelRef}
+              className={`genre-wheel ${isDragging ? 'dragging' : ''} ${isAutoRotating ? 'auto-rotating' : ''}`}
+              style={!isAutoRotating 
+                ? { transform: `rotate(${currentAngle}deg)` } 
+                : getAutoRotateStyles()}
+              onMouseDown={handleMouseDown}
+              onTouchStart={handleMouseDown}
             >
-              <div
-                className="genre-link"
-                onClick={() => handleGenreClick(project.name)}
+              {filteredProjects.map((project, index) => {
+                // Calculate angle based on index for a full circle
+                const angle = (360 / filteredProjects.length) * index;
+                
+                // Use a fixed radius to create a perfect circle that follows the red line
+                const radius = window.innerWidth <= 768 ? 200 : 300;
+                
+                // Generate color based on project position
+                const colorScheme = [
+                  '#FF2D55', // Pink
+                  '#4CD964', // Green
+                  '#5856D6', // Purple
+                  '#FF9500', // Orange
+                  '#00E4FF', // Cyan
+                  '#FF375F', // Bright Pink
+                  '#34C759', // Bright Green
+                  '#AF52DE', // Bright Purple
+                  '#FFCC00'  // Bright Yellow
+                ];
+                
+                const colorIndex = (index * 2) % colorScheme.length;
+                const color = colorScheme[colorIndex];
+                
+                // Calculate font size - using a fixed font size for consistency
+                const fontSize = 16; // Slightly smaller font size for better fit
+                
+                // Fixed opacity for better visibility
+                const opacity = 0.9;
+                
+                // Create trail effect with project name
+                const words = [project.displayName];
+                const trailLength = 5; // Increased trail length
+                
+                // Is this project selected?
+                const isSelected = selectedProject?.author === project.author;
+                
+                return (
+                  <div
+                    key={index}
+                    className="genre-item"
+                    style={{
+                      color: color,
+                      transform: `rotate(${angle}deg) translateX(${radius}px)`,
+                      fontSize: `${fontSize}px`,
+                      opacity: opacity,
+                      left: 0,
+                      top: 0,
+                      zIndex: isSelected ? 20 : 'auto'
+                    }}
+                  >
+                    <a
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleProjectClick(project);
+                      }}
+                      className="genre-link"
+                      style={{
+                        boxShadow: isSelected ? `0 0 10px ${color}` : 'none',
+                        fontWeight: isSelected ? 'bold' : 'normal',
+                        pointerEvents: 'auto',
+                        padding: '4px 8px', // Slightly smaller padding
+                      }}
+                    >
+                      {project.displayName}
+                    </a>
+                    
+                    <span className="trailing-links">
+                      {Array.from({ length: trailLength }).map((_, i) => (
+                        <a 
+                          key={i}
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            handleProjectClick(project);
+                          }}
+                          className="trailing-link"
+                          style={{ 
+                            opacity: Math.max(0.8 - (i * 0.15), 0.3),
+                            pointerEvents: 'auto',
+                            marginLeft: '12px', // Slightly reduced margin
+                            padding: '4px 6px', // Slightly smaller padding
+                          }}
+                        >
+                          {words[0]}
+                        </a>
+                      ))}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Portal Overlay */}
+        <div 
+          className={`portal-overlay ${showPortal ? 'active' : ''}`}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setShowPortal(false);
+              setSelectedProject(null);
+            }
+          }}
+        >
+          <div className="portal-container" onClick={handlePortalClick}>
+            <div className="portal">
+              <div className="portal-swirl"></div>
+            </div>
+            <div className="portal-text">
+              <h2>{selectedProject?.author || ''}</h2>
+              <p>Click to View Project</p>
+            </div>
+            
+            {/* Portal particles */}
+            <div className="portal-particles">
+              {particles.map(particle => (
+                <div
+                  key={particle.id}
+                  className="portal-particle"
+                  style={{
+                    left: `${particle.left}%`,
+                    top: `${particle.top}%`,
+                    width: `${particle.size}px`,
+                    height: `${particle.size}px`,
+                    backgroundColor: particle.color,
+                    animationDelay: `${particle.delay}s`
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Links panel */}
+        <button className="toggle-links-button" onClick={() => setShowLinks(!showLinks)}>
+          {showLinks ? 'Hide Games' : 'Show Games'} 
+          <span>{showLinks ? '×' : '+'}</span>
+        </button>
+
+        {showLinks && (
+          <div className="genre-links-container">
+            {projects.map((project) => (
+              <a
+                key={project.name}
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="permanent-genre-link"
               >
                 {project.name}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Portal overlay */}
-      <div className={`portal-overlay ${showPortal ? 'active' : ''}`}>
-        <div className="portal-container" onClick={handlePortalClick}>
-          <div className="portal">
-            <div className="portal-swirl"></div>
+              </a>
+            ))}
           </div>
-          <div className="portal-text">
-            <h2>{selectedProject}</h2>
-            <p>Click to enter</p>
-          </div>
-        </div>
+        )}
       </div>
-
-      {/* Links panel */}
-      <button className="toggle-links-button" onClick={() => setShowLinks(!showLinks)}>
-        {showLinks ? 'Hide Games' : 'Show Games'} 
-        <span>{showLinks ? '×' : '+'}</span>
-      </button>
-
-      {showLinks && (
-        <div className="genre-links-container">
-          {projects.map((project) => (
-            <a
-              key={project.name}
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="permanent-genre-link"
-            >
-              {project.name}
-            </a>
-          ))}
-        </div>
-      )}
 
       {/* Content Modal */}
       <ContentModal
-        isOpen={showPortal}
+        isOpen={modalOpen}
         onClose={() => {
-          setShowPortal(false);
-          setSelectedProject('');
+          setModalOpen(false);
+          setSelectedProject(null);
         }}
-        title={selectedProject}
-        url={getProjectUrl(selectedProject)}
+        title={modalTitle}
+        url={modalUrl}
       />
     </>
   );
-};
+});
 
 // Add this helper function at the component level
 const generateGenreColor = (index: number) => {
