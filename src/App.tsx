@@ -345,7 +345,7 @@ function App() {
               <div className="mb-12">
                 <div className="text-white/70 text-sm font-medium transform -rotate-1 mb-3">
                   Presented by
-                </div>
+        </div>
                 <div className="flex gap-3 mt-2">
                   <a 
                     href="https://bolt.fun" 
@@ -353,8 +353,8 @@ function App() {
                     rel="noopener noreferrer" 
                     className="bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10 shadow-lg transform rotate-1 w-[120px] hover:scale-105 transition-transform"
                   >
-                    <img 
-                      src="/images/bolttoo.png" 
+                <img 
+                  src="/images/bolttoo.png" 
                       alt="Bolt" 
                       className="w-full h-auto"
                     />
@@ -420,7 +420,7 @@ function App() {
                       <div className="relative">
                         <div className="absolute -left-3 -top-1 text-white/40 transform -rotate-12">⚅</div>
                         <div className="text-white/60">⚄</div>
-                      </div>
+              </div>
                     </>
                   )}
                   {isSpinning ? 'Spinning...' : 'Random Game Inspiration'}
