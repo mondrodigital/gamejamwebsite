@@ -189,7 +189,7 @@ function App() {
   const [isSpinning, setIsSpinning] = useState(false);
   const [countdown, setCountdown] = useState("");
   const spinTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  
+
   // Calculate countdown to April 1st
   useEffect(() => {
     const calculateCountdown = () => {
@@ -341,6 +341,40 @@ function App() {
           {/* Left content - Text section with simplified copy */}
           <div className="w-full lg:w-1/2 p-6 md:p-10 lg:p-16 flex items-center z-30 relative">
             <div className="w-full">
+              {/* Sponsor Logos */}
+              <div className="mb-12">
+                <div className="text-white/70 text-sm font-medium transform -rotate-1 mb-3">
+                  Presented by
+                </div>
+                <div className="flex gap-3 mt-2">
+                  <a 
+                    href="https://bolt.fun" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10 shadow-lg transform rotate-1 w-[120px] hover:scale-105 transition-transform"
+                  >
+                    <img 
+                      src="/images/bolttoo.png" 
+                      alt="Bolt" 
+                      className="w-full h-auto"
+                    />
+                  </a>
+                  <a 
+                    href="https://coderabbit.ai" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10 shadow-lg transform -rotate-2 w-[120px] hover:scale-105 transition-transform"
+                  >
+                    <img 
+                      src="/images/rabbit.png" 
+                      alt="CodeRabbit" 
+                      className="w-full h-auto"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              {/* Countdown */}
               <div className="text-lg font-medium mb-4">
                 <span className="text-white/90">Time Left to Submit:</span>{' '}
                 <span className="text-green-400">{countdown}</span>
@@ -391,10 +425,10 @@ function App() {
                   )}
                   {isSpinning ? 'Spinning...' : 'Random Game Inspiration'}
                 </button>
-              </div>
-            </div>
           </div>
-          
+        </div>
+      </div>
+
           {/* Right content - Wheel section with adjusted left position */}
           <div className="w-full lg:w-[120%] h-screen absolute lg:relative right-0 lg:-left-[24rem] top-0 pointer-events-auto z-10 overflow-visible">
             <RotatingWheel ref={wheelRef} className="w-full h-full" />
