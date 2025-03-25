@@ -28,8 +28,7 @@ const wheelStyles = `
   transform-origin: center center;
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left: 5%;
   width: 0;
   height: 0;
   user-select: none;
@@ -65,7 +64,7 @@ const wheelStyles = `
 .genre-link {
   color: inherit;
   text-decoration: none;
-  padding: 4px 8px;
+  padding: 6px 10px;
   border-radius: 4px;
   display: inline-block;
   transition: all 0.2s ease;
@@ -73,14 +72,6 @@ const wheelStyles = `
   cursor: pointer !important;
   position: relative;
   z-index: 100;
-  font-size: 14px;
-}
-
-@media (max-width: 768px) {
-  .genre-link {
-    font-size: 12px;
-    padding: 3px 6px;
-  }
 }
 
 .genre-link:hover {
@@ -90,13 +81,36 @@ const wheelStyles = `
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-/* Links panel styles */
+.trailing-links {
+  display: inline-block;
+}
+
+.trailing-link {
+  color: inherit;
+  text-decoration: none;
+  margin-left: 16px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  transition: all 0.2s ease;
+  cursor: pointer !important;
+  position: relative;
+  z-index: 100;
+}
+
+.trailing-link:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  text-decoration: underline;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* New styles for the permanent clickable links */
 .genre-links-container {
-  position: fixed;
-  right: 16px;
-  top: 80px;
-  width: min(300px, calc(100% - 32px));
-  max-height: 60vh;
+  position: absolute;
+  right: 10%;
+  top: 10%;
+  width: 300px;
+  max-height: 80%;
   overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 12px;
@@ -105,13 +119,36 @@ const wheelStyles = `
   display: flex;
   flex-direction: column;
   gap: 8px;
-  backdrop-filter: blur(10px);
 }
 
+.permanent-genre-link {
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.permanent-genre-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+}
+
+.permanent-genre-link::before {
+  content: "→";
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+/* Style for the toggle button */
 .toggle-links-button {
-  position: fixed;
-  right: 16px;
-  top: 16px;
+  position: absolute;
+  right: 10%;
+  top: 5%;
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
   border: none;
@@ -123,10 +160,13 @@ const wheelStyles = `
   display: flex;
   align-items: center;
   gap: 6px;
-  backdrop-filter: blur(10px);
 }
 
-/* Portal styles */
+.toggle-links-button:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Portal animation styles */
 .portal-overlay {
   position: fixed;
   top: 0;
@@ -141,15 +181,78 @@ const wheelStyles = `
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
-  backdrop-filter: blur(5px);
+}
+
+.portal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .portal-container {
   position: relative;
-  width: min(300px, 90vw);
-  height: min(300px, 90vw);
+  width: 300px;
+  height: 300px;
   cursor: pointer;
   transition: transform 0.3s ease;
+}
+
+.portal-container:hover {
+  transform: scale(1.05);
+}
+
+.portal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, 
+    #76ff03 0%, 
+    #64dd17 10%, 
+    #43a047 20%, 
+    #00bcd4 40%,
+    #2196f3 60%, 
+    #9c27b0 80%, 
+    #651fff 100%
+  );
+  box-shadow: 0 0 100px #76ff03, 0 0 50px #43a047, 0 0 25px #2196f3;
+  transform-origin: center;
+  animation: portalSpin 2s linear infinite, portalPulse 3s ease-in-out infinite;
+  z-index: 9001;
+}
+
+.portal::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #000;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.8) inset;
+  z-index: 9002;
+}
+
+.portal-swirl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(
+    transparent 0deg,
+    rgba(0, 255, 0, 0.5) 60deg,
+    transparent 120deg,
+    rgba(0, 255, 0, 0.5) 180deg,
+    transparent 240deg,
+    rgba(0, 255, 0, 0.5) 300deg,
+    transparent 360deg
+  );
+  border-radius: 50%;
+  filter: blur(10px);
+  animation: portalSwirl 4s linear infinite;
+  z-index: 9003;
 }
 
 .portal-text {
@@ -158,21 +261,74 @@ const wheelStyles = `
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
+  font-size: 24px;
+  font-weight: bold;
   text-align: center;
   z-index: 9004;
-  width: 100%;
-  padding: 0 20px;
-}
-
-.portal-text h2 {
-  font-size: clamp(18px, 5vw, 24px);
-  margin-bottom: 8px;
   text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
 }
 
-.portal-text p {
-  font-size: clamp(14px, 4vw, 18px);
+.click-instructions {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+  animation: pulseText 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseText {
+  0% { opacity: 0.5; transform: translateX(-50%) scale(0.95); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+  100% { opacity: 0.5; transform: translateX(-50%) scale(0.95); }
+}
+
+@keyframes portalSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes portalSwirl {
+  0% { transform: rotate(0deg) scale(0.6); }
+  100% { transform: rotate(-360deg) scale(0.6); }
+}
+
+@keyframes portalPulse {
+  0% { transform: scale(0.9); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(0.9); }
+}
+
+@keyframes portalGrow {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.portal-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9000;
+}
+
+.portal-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #76ff03;
+  border-radius: 50%;
   opacity: 0.8;
+  animation: particleFloat 2s linear infinite;
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(0) translateX(0); opacity: 1; }
+  100% { transform: translateY(-200px) translateX(100px); opacity: 0; }
 }
 
 /* Judges panel styles */
@@ -687,216 +843,184 @@ export const RotatingWheel = React.forwardRef<
   
   return (
     <>
-      <div className="relative w-full min-h-screen overflow-hidden bg-black">
-        <div
-          ref={wheelRef}
-          className={`genre-wheel ${isDragging ? 'dragging' : ''} ${
-            isAutoRotating ? 'auto-rotating' : ''
-          } ${className || ''}`}
-          style={getAutoRotateStyles()}
-          onMouseDown={handleMouseDown}
-          onTouchStart={handleMouseDown}
-          onWheel={handleWheel}
-        >
-          <style>{wheelStyles}</style>
-          
-          {/* Add Judges Panel */}
-          <div className="judges-panel">
-            <div className="judges-title">Judges</div>
-            <div className="judges-grid">
-              {projects.filter(p => p.isJudge).map((judge, index) => (
-                <div 
-                  key={judge.handle} 
-                  className="judge-item"
-                  onClick={() => window.open(judge.tweetUrl, '_blank', 'noopener,noreferrer')}
-                >
-                  <img 
-                    src={`/images/${judge.imageUrl}`} 
-                    alt={judge.author}
-                    className="judge-image"
-                    loading="eager"
-                  />
-                  <div className="judge-name">@{judge.handle}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Add mask gradient container */}
-          <div className="absolute inset-0 pointer-events-none" style={{
-            background: 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 75%, rgba(0,0,0,1) 95%)',
-            maskImage: 'linear-gradient(to right, black 0%, black 75%, transparent 95%)',
-            WebkitMaskImage: 'linear-gradient(to right, black 0%, black 75%, transparent 95%)',
-            zIndex: 20,
-            width: '150%'  // Extend the mask beyond the container
-          }} />
-          <div className="absolute w-full h-full">
-            <div 
-              ref={wheelRef}
-              className={`genre-wheel ${isDragging ? 'dragging' : ''} ${isAutoRotating ? 'auto-rotating' : ''}`}
-              style={!isAutoRotating 
-                ? { transform: `rotate(${currentAngle}deg)` } 
-                : getAutoRotateStyles()}
-              onMouseDown={handleMouseDown}
-              onTouchStart={handleMouseDown}
-            >
-              {filteredProjects.map((project, index) => {
-                // Calculate angle based on index for a full circle
-                const angle = (360 / filteredProjects.length) * index;
-                
-                // Use a fixed radius to create a perfect circle that follows the red line
-                const radius = window.innerWidth <= 768 ? 200 : 300;
-                
-                // Generate color based on project position
-                const colorScheme = [
-                  '#FF2D55', // Pink
-                  '#4CD964', // Green
-                  '#5856D6', // Purple
-                  '#FF9500', // Orange
-                  '#00E4FF', // Cyan
-                  '#FF375F', // Bright Pink
-                  '#34C759', // Bright Green
-                  '#AF52DE', // Bright Purple
-                  '#FFCC00'  // Bright Yellow
-                ];
-                
-                const colorIndex = (index * 2) % colorScheme.length;
-                const color = colorScheme[colorIndex];
-                
-                // Calculate font size - using a fixed font size for consistency
-                const fontSize = 16; // Slightly smaller font size for better fit
-                
-                // Fixed opacity for better visibility
-                const opacity = 0.9;
-                
-                // Create trail effect with project name
-                const words = [project.displayName];
-                const trailLength = 5; // Increased trail length
-                
-                // Is this project selected?
-                const isSelected = selectedProject?.author === project.author;
-                
-                return (
-                  <div
-                    key={index}
-                    className="genre-item"
-                    style={{
-                      color: color,
-                      transform: `rotate(${angle}deg) translateX(${radius}px)`,
-                      fontSize: `${fontSize}px`,
-                      opacity: opacity,
-                      left: 0,
-                      top: 0,
-                      zIndex: isSelected ? 20 : 'auto'
-                    }}
-                  >
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleProjectClick(project);
-                      }}
-                      className="genre-link"
-                      style={{
-                        boxShadow: isSelected ? `0 0 10px ${color}` : 'none',
-                        fontWeight: isSelected ? 'bold' : 'normal',
-                        pointerEvents: 'auto',
-                        padding: '4px 8px', // Slightly smaller padding
-                      }}
-                    >
-                      {project.displayName}
-                    </a>
-                    
-                    <span className="trailing-links">
-                      {Array.from({ length: trailLength }).map((_, i) => (
-                        <a 
-                          key={i}
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            handleProjectClick(project);
-                          }}
-                          className="trailing-link"
-                          style={{ 
-                            opacity: Math.max(0.8 - (i * 0.15), 0.3),
-                            pointerEvents: 'auto',
-                            marginLeft: '12px', // Slightly reduced margin
-                            padding: '4px 6px', // Slightly smaller padding
-                          }}
-                        >
-                          {words[0]}
-                        </a>
-                      ))}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        {/* Portal Overlay */}
-        <div 
-          className={`portal-overlay ${showPortal ? 'active' : ''}`}
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              setShowPortal(false);
-              setSelectedProject(null);
-            }
-          }}
-        >
-          <div className="portal-container" onClick={handlePortalClick}>
-            <div className="portal">
-              <div className="portal-swirl"></div>
-            </div>
-            <div className="portal-text">
-              <h2>{selectedProject?.author || ''}</h2>
-              <p>Click to View Project</p>
-            </div>
-            
-            {/* Portal particles */}
-            <div className="portal-particles">
-              {particles.map(particle => (
-                <div
-                  key={particle.id}
-                  className="portal-particle"
-                  style={{
-                    left: `${particle.left}%`,
-                    top: `${particle.top}%`,
-                    width: `${particle.size}px`,
-                    height: `${particle.size}px`,
-                    backgroundColor: particle.color,
-                    animationDelay: `${particle.delay}s`
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Links panel */}
-        <button className="toggle-links-button" onClick={() => setShowLinks(!showLinks)}>
-          {showLinks ? 'Hide Games' : 'Show Games'} 
-          <span>{showLinks ? '×' : '+'}</span>
-        </button>
-
-        {showLinks && (
-          <div className="genre-links-container">
-            {projects.map((project) => (
-              <a
-                key={project.name}
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="permanent-genre-link"
+      <div 
+        className={`relative w-full h-full ${className || ''}`}
+        onWheel={handleWheel}
+      >
+        <style>{wheelStyles}</style>
+        
+        {/* Add Judges Panel */}
+        <div className="judges-panel">
+          <div className="judges-title">Judges</div>
+          <div className="judges-grid">
+            {projects.filter(p => p.isJudge).map((judge, index) => (
+              <div 
+                key={judge.handle} 
+                className="judge-item"
+                onClick={() => window.open(judge.tweetUrl, '_blank', 'noopener,noreferrer')}
               >
-                {project.name}
-              </a>
+                <img 
+                  src={`/images/${judge.imageUrl}`} 
+                  alt={judge.author}
+                  className="judge-image"
+                  loading="eager"
+                />
+                <div className="judge-name">@{judge.handle}</div>
+              </div>
             ))}
           </div>
-        )}
+        </div>
+
+        {/* Add mask gradient container */}
+        <div className="absolute inset-0 pointer-events-none" style={{
+          background: 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 75%, rgba(0,0,0,1) 95%)',
+          maskImage: 'linear-gradient(to right, black 0%, black 75%, transparent 95%)',
+          WebkitMaskImage: 'linear-gradient(to right, black 0%, black 75%, transparent 95%)',
+          zIndex: 20,
+          width: '150%'  // Extend the mask beyond the container
+        }} />
+        <div className="absolute w-full h-full">
+          <div 
+            ref={wheelRef}
+            className={`genre-wheel ${isDragging ? 'dragging' : ''} ${isAutoRotating ? 'auto-rotating' : ''}`}
+            style={!isAutoRotating 
+              ? { transform: `rotate(${currentAngle}deg)` } 
+              : getAutoRotateStyles()}
+            onMouseDown={handleMouseDown}
+            onTouchStart={handleMouseDown}
+          >
+            {filteredProjects.map((project, index) => {
+              // Calculate angle based on index for a full circle
+              const angle = (360 / filteredProjects.length) * index;
+              
+              // Use a fixed radius to create a perfect circle that follows the red line
+              const radius = 550;
+              
+              // Generate color based on project position
+              const colorScheme = [
+                '#FF2D55', // Pink
+                '#4CD964', // Green
+                '#5856D6', // Purple
+                '#FF9500', // Orange
+                '#00E4FF', // Cyan
+                '#FF375F', // Bright Pink
+                '#34C759', // Bright Green
+                '#AF52DE', // Bright Purple
+                '#FFCC00'  // Bright Yellow
+              ];
+              
+              const colorIndex = (index * 2) % colorScheme.length;
+              const color = colorScheme[colorIndex];
+              
+              // Calculate font size - using a fixed font size for consistency
+              const fontSize = 16; // Slightly smaller font size for better fit
+              
+              // Fixed opacity for better visibility
+              const opacity = 0.9;
+              
+              // Create trail effect with project name
+              const words = [project.displayName];
+              const trailLength = 5; // Increased trail length
+              
+              // Is this project selected?
+              const isSelected = selectedProject?.author === project.author;
+              
+              return (
+                <div
+                  key={index}
+                  className="genre-item"
+                  style={{
+                    color: color,
+                    transform: `rotate(${angle}deg) translateX(${radius}px)`,
+                    fontSize: `${fontSize}px`,
+                    opacity: opacity,
+                    left: 0,
+                    top: 0,
+                    zIndex: isSelected ? 20 : 'auto'
+                  }}
+                >
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleProjectClick(project);
+                    }}
+                    className="genre-link"
+                    style={{
+                      boxShadow: isSelected ? `0 0 10px ${color}` : 'none',
+                      fontWeight: isSelected ? 'bold' : 'normal',
+                      pointerEvents: 'auto',
+                      padding: '4px 8px', // Slightly smaller padding
+                    }}
+                  >
+                    {project.displayName}
+                  </a>
+                  
+                  <span className="trailing-links">
+                    {Array.from({ length: trailLength }).map((_, i) => (
+                      <a 
+                        key={i}
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleProjectClick(project);
+                        }}
+                        className="trailing-link"
+                        style={{ 
+                          opacity: Math.max(0.8 - (i * 0.15), 0.3),
+                          pointerEvents: 'auto',
+                          marginLeft: '12px', // Slightly reduced margin
+                          padding: '4px 6px', // Slightly smaller padding
+                        }}
+                      >
+                        {words[0]}
+                      </a>
+                    ))}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Portal Overlay */}
+      <div 
+        className={`portal-overlay ${showPortal ? 'active' : ''}`}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            setShowPortal(false);
+            setSelectedProject(null);
+          }
+        }}
+      >
+        <div className="portal-container" onClick={handlePortalClick}>
+          <div className="portal">
+            <div className="portal-swirl"></div>
+          </div>
+          <div className="portal-text">{selectedProject?.author || ''}</div>
+          <div className="click-instructions">Click to View Project</div>
+          
+          {/* Portal particles */}
+          <div className="portal-particles">
+            {particles.map(particle => (
+              <div
+                key={particle.id}
+                className="portal-particle"
+                style={{
+                  left: `${particle.left}%`,
+                  top: `${particle.top}%`,
+                  width: `${particle.size}px`,
+                  height: `${particle.size}px`,
+                  backgroundColor: particle.color,
+                  animationDelay: `${particle.delay}s`
+                }}
+              />
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Content Modal */}
